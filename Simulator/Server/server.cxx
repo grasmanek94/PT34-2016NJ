@@ -41,6 +41,16 @@ void on_open(server* s, websocketpp::connection_hdl hdl)
 		std::cout << "Echo failed because: " << e
 			<< "(" << e.message() << ")" << std::endl;
 	}
+
+	request = "{\"GetSensorData\": { \"temperature\": [ 0, 1 ], \"humidity\": []}}";
+
+	try {
+		s->send(hdl, request.c_str(), request.length() + 1, websocketpp::frame::opcode::TEXT);
+	}
+	catch (const websocketpp::lib::error_code& e) {
+		std::cout << "Echo failed because: " << e
+			<< "(" << e.message() << ")" << std::endl;
+	}
 }
 
 int main() 

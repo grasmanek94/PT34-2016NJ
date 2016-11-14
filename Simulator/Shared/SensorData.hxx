@@ -16,6 +16,6 @@ public:
 
 	virtual std::string GetRequestJson() const;
 	virtual std::string GetResponseJson() const;
-	virtual void ParseRequestJson(const std::string& json);
+	virtual void ParseRequestJson(const std::string& _json);
 	virtual void ParseResponseJson(const std::string& json);
 };

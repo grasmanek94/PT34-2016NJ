@@ -36,9 +36,16 @@ std::string DeviceSetup::GetRequestJson() const
 	return request_text;
 }
 
-void DeviceSetup::ParseRequestJson(const std::string& json)
+void DeviceSetup::ParseRequestJson(const std::string& _json)
 {
+	const json j = json::parse(_json.c_str());
+	//cleanup
 
+	auto device_setup = j.find("GetDeviceSetup");
+	if (device_setup != j.end())
+	{
+		// process stuff
+	}
 }
 
 std::string DeviceSetup::GetResponseJson() const
@@ -143,6 +150,18 @@ Sensor* DeviceSetup::GetSensor(SensorType type, size_t index) const
 	}
 
 	return sensor_vec->second[index];
+}
+
+size_t DeviceSetup::GetSensorCount(SensorType type) const
+{
+	auto sensor_vec = sensors.find(type);
+
+	if (sensor_vec == sensors.end())
+	{
+		return 0;
+	}
+
+	return sensor_vec->second.size();
 }
 
 void DeviceSetup::ParseResponseJson(const std::string& _json)

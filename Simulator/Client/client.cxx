@@ -53,7 +53,7 @@ void on_message(client* s, websocketpp::connection_hdl hdl, message_ptr msg)
 	{	
 		std::cout << "GetDeviceSetup found" << std::endl;
 
-		setup.ParseRequestJson(device_setup->dump());
+		setup.ParseRequestJson(j.dump());
 
 		std::cout << "GetDeviceSetup parsed" << std::endl;
 
@@ -79,7 +79,7 @@ void on_message(client* s, websocketpp::connection_hdl hdl, message_ptr msg)
 		std::cout << "GetSensorData found" << std::endl;
 
 		SensorData data(&setup);
-		data.ParseRequestJson(get_sensor_data->dump());
+		data.ParseRequestJson(j.dump());
 
 		std::cout << "GetSensorData parsed" << std::endl;
 
