@@ -73,7 +73,7 @@ private:
 	std::string serial;
 	sensors_list_t sensors;
 	size_t capabilities;
-	const static size_t protocol_revision = 2;
+	const static size_t protocol_revision = 3;
 	FirmwareInfo fwinfo;
 public:
 	DeviceSetup();
