@@ -161,15 +161,16 @@ void DeviceSetup::ParseResponseJson(const std::string& _json)
 			serial = "UNKNOWN";
 		}
 
+		// TODO: finish this function to be able to construct DeviceSetup object completely from a JSON formatted string
 		auto devices_found = device_setup->find("devices");
 		sensors.clear();
 		if (devices_found != device_setup->end())
 		{
-			serial = serial_found->get<std::string>();
+			
 		}
 		else
 		{
-			serial = "UNKNOWN";
+			
 		}
 	}
 }
