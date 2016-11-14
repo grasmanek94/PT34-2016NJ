@@ -7,6 +7,7 @@
 #include <DeviceSetup.hxx>
 #include <DummySensor.hxx>
 #include <HostFileReader.hxx>
+#include <SensorData.hxx>
 
 typedef websocketpp::client<websocketpp::config::asio> client;
 
@@ -17,16 +18,6 @@ using websocketpp::lib::bind;
 // pull out the type of messages sent by our config
 typedef client::message_ptr message_ptr;
 using json = nlohmann::json;
-
-void on_open(client* s, websocketpp::connection_hdl hdl)
-{
-	std::cout << "CONNECTED to server" << std::endl;
-}
-
-void on_close(client* s, websocketpp::connection_hdl hdl) 
-{
-	std::cout << "DISCONNECTED from server" << std::endl;
-}
 
 DeviceSetup setup(
 	"CLIENT0001",
@@ -41,7 +32,16 @@ DeviceSetup setup(
 		new DummySensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 9.0, 10.0, -10.0 })
 	});
 
-// Define a callback to handle incoming messages
+void on_open(client* s, websocketpp::connection_hdl hdl)
+{
+	std::cout << "CONNECTED to server" << std::endl;
+}
+
+void on_close(client* s, websocketpp::connection_hdl hdl) 
+{
+	std::cout << "DISCONNECTED from server" << std::endl;
+}
+
 void on_message(client* s, websocketpp::connection_hdl hdl, message_ptr msg) 
 {
 	std::cout << "Received a message from the server: \"" << msg->get_payload() << "\"" << std::endl;
@@ -67,6 +67,32 @@ void on_message(client* s, websocketpp::connection_hdl hdl, message_ptr msg)
 			std::cout << "Send websocket message succesfully: \"" << response << "\"" << std::endl;
 		}
 		catch (const websocketpp::lib::error_code& e) 
+		{
+			std::cout << "WebSocket response failed because: " << e
+				<< "(" << e.message() << ")" << std::endl;
+		}
+	}
+
+	auto get_sensor_data = j.find("GetSensorData");
+	if (get_sensor_data != j.end())
+	{
+		std::cout << "GetSensorData found" << std::endl;
+
+		SensorData data(&setup);
+		data.ParseRequestJson(get_sensor_data->dump());
+
+		std::cout << "GetSensorData parsed" << std::endl;
+
+		std::string response(data.GetResponseJson());
+
+		std::cout << "GetSensorData response" << std::endl;
+
+		try
+		{
+			s->send(hdl, response.c_str(), response.length() + 1, websocketpp::frame::opcode::TEXT);
+			std::cout << "Send websocket message succesfully: \"" << response << "\"" << std::endl;
+		}
+		catch (const websocketpp::lib::error_code& e)
 		{
 			std::cout << "WebSocket response failed because: " << e
 				<< "(" << e.message() << ")" << std::endl;
@@ -114,7 +140,7 @@ int main()
 	}
 	catch (websocketpp::exception const & e) 
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << "WebSocket exception occurred: " << e.what() << std::endl;
 	}
 	catch (std::exception const & e)
 	{
