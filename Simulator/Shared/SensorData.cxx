@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <limits>
 #include <json-develop/src/json.hpp>
 #include "SensorData.hxx"
 
@@ -50,7 +51,7 @@ std::string SensorData::GetResponseJson() const
 				}
 				else
 				{
-					mapped_json.push_back({ sens_number, -INFINITY });
+					mapped_json.push_back({ sens_number, -std::numeric_limits<double>::infinity() });
 				}
 			}
 		}
@@ -66,7 +67,7 @@ std::string SensorData::GetResponseJson() const
 				}
 				else
 				{
-					mapped_json.push_back({ i, -INFINITY });
+					mapped_json.push_back({ i, -std::numeric_limits<double>::infinity() });
 				}
 			}
 		}

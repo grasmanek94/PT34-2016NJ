@@ -144,7 +144,7 @@ Sensor* DeviceSetup::GetSensor(SensorType type, size_t index) const
 {
 	auto sensor_vec = sensors.find(type);
 
-	if (sensor_vec == sensors.end() || sensor_vec->second.size() >= index)
+	if (sensor_vec == sensors.end() || sensor_vec->second.size() <= index)
 	{
 		return NULL;
 	}
