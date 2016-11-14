@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shared">
-      <UniqueIdentifier>{7709cdf2-f44e-4cfd-9170-466744129af4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="boost_dependencies.cxx">
@@ -24,55 +21,5 @@
     <ClCompile Include="server.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shared\Sensor.cxx">
-      <Filter>Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\SensorData.cxx">
-      <Filter>Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\SensorSetup.cxx">
-      <Filter>Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\DeviceSetup.cxx">
-      <Filter>Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\DummySensor.cxx">
-      <Filter>Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\ExecCommand.cxx">
-      <Filter>Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\FirmwareInfo.cxx">
-      <Filter>Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shared\JSONable.cxx">
-      <Filter>Shared</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Shared\Sensor.hxx">
-      <Filter>Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\SensorData.hxx">
-      <Filter>Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\SensorSetup.hxx">
-      <Filter>Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\DeviceSetup.hxx">
-      <Filter>Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\DummySensor.hxx">
-      <Filter>Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\ExecCommand.hxx">
-      <Filter>Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\FirmwareInfo.hxx">
-      <Filter>Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shared\JSONable.hxx">
-      <Filter>Shared</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
