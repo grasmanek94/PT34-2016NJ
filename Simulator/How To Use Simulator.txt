@@ -1,0 +1,3 @@
+1) edit (or create) the 'host.txt' file and change the content to match the address of your WebSocket server, example: ws://localhost:9002
+2) run 'ProtocolSimulator.exe', it will (try to) establish a WebSocket connection to the address specified in 'host.txt'
+3) after the connection is established the server can send '{GetDeviceSetup,{}}' to request the device setup or '{GetSensorData, {}}' according to the Protocol Document specifications to obtain randomly generated sensor output
