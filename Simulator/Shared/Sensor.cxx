@@ -17,7 +17,7 @@ Sensor::Sensor(
 
 	: type(type), unit(unit), 
 	placement(placement), num_values(num_values), 
-	min_value(min_value), max_value(max_value), position(position)
+	position(position), min_value(min_value), max_value(max_value)
 {
 
 }
