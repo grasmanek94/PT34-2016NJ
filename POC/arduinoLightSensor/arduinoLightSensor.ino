@@ -11,9 +11,9 @@ sensor = new LightSensor();
 void loop() {
   // put your main code here, to run repeatedly:
 sensor->requestData();
-delay(250);
+delay(150);
 uint16_t result = 0;
 result = sensor->readData();
 Serial.println(result, DEC);
-delay(150);
+delay(50);
 }

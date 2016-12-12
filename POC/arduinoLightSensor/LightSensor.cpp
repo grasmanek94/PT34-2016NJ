@@ -22,13 +22,19 @@ uint16_t LightSensor::readData()
   Wire.requestFrom(address, 2);
   while (Wire.available()) //
   {
-    buff[i] = Wire.read(); // receive one byte
+    val<<=8;
+    val += Wire.read(); // receive one byte
     i++;
   }
   Wire.endTransmission();
   if (i == 2)
-  {
+  {/*
     val = ((buff[0] << 8) | buff[1]) / 1.2;
+    if(val>60000)
+    { 
+      val = 0;
+    }*/
+    val /= 1.2;
     return val;
   }
   else
