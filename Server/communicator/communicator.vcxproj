@@ -19,12 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\RawQueue.cpp" />
+    <ClCompile Include="..\common\SharedMemoryHelper.cpp" />
     <ClCompile Include="..\common\SharedMemoryQueue.cpp" />
     <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp" />
     <ClCompile Include="HostFileReader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\RawQueue.hpp" />
+    <ClInclude Include="..\common\SharedMemoryHelper.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueue.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp" />
     <ClInclude Include="HostFileReader.hpp" />
@@ -83,15 +87,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Development\Libraries\DummyLinuxHeaders\include;$(BOOST_ROOT);$(DXSDK_DIR)Include\;$(QT_ROOT)5.6\msvc2015_86\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Development\Libraries\DummyLinuxHeaders\include;$(BOOST_ROOT);$(DXSDK_DIR)Include\;$(QT_ROOT)5.6\msvc2015_64\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Development\Libraries\DummyLinuxHeaders\include;$(BOOST_ROOT);$(DXSDK_DIR)Include\;$(QT_ROOT)5.6\msvc2015_86\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Development\Libraries\DummyLinuxHeaders\include;$(BOOST_ROOT);$(DXSDK_DIR)Include\;$(QT_ROOT)5.6\msvc2015_64\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

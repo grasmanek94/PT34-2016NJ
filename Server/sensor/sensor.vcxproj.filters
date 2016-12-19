@@ -39,6 +39,12 @@
     <ClCompile Include="FirmwareInfo.cpp">
       <Filter>sensor</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\SharedMemoryHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\RawQueue.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp">
@@ -67,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="FirmwareInfo.hpp">
       <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\SharedMemoryHelper.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\RawQueue.hpp">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
