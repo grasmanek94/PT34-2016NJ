@@ -110,15 +110,10 @@ void Communicator::Run()
 		memset(&action, 0, sizeof(struct sigaction));
 		action.sa_handler = term;
 		sigaction(SIGTERM, &action, NULL);
-
 	}
-	//try
-	//{
-		
+
 	Reconnect();
 
-	// Start the ASIO io_service run loop
-	//echo_client.run();
 	SharedMemoryQueueMessage message;
 
 	while (!done)
