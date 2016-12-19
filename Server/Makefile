@@ -1,0 +1,26 @@
+CFLAGS=-Wall -Werror -O3 -Icommunicator -Isensor -Icommon -c -std=c++11
+LDDFLAGS=-lpthread -pthread 
+
+COMMUNICATOR_SOURCES=$(wildcard common/*.cpp communicator/*.cpp)
+COMMUNICATOR_OBJECTS=$(COMMUNICATOR_SOURCES:.cpp=.o)
+
+SENSOR_SOURCES=$(wildcard common/*.cpp sensor/*.cpp)
+SENSOR_OBJECTS=$(SENSOR_SOURCES:.cpp=.o)
+
+CC=g++
+
+.phony: all clean
+
+communicator.bin: $(COMMUNICATOR_OBJECTS) Makefile
+	@$(CC) $(COMMUNICATOR_OBJECTS) -o $@ $(LDDFLAGS)
+
+sensor.bin: $(SENSOR_OBJECTS) Makefile
+	@$(CC) $(SENSOR_OBJECTS) -o $@ $(LDDFLAGS)
+	
+all: communicator.bin sensor.bin
+
+.cpp.o: Makefile
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	@rm -rf communicator.bin sensor.bin communicator/*.o sensor/*.o

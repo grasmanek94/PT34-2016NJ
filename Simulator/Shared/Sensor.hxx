@@ -48,7 +48,7 @@ const static SensorUnitStringType SensorUnitStrings = boost::assign::list_of< Se
 	(SensorUnitDecibel, "dB")
 	(SensorUnitKilograms, "kg")
 	(SensorUnitPercent, "%")
-	(SensorUnitPascal, "p")
+	(SensorUnitPascal, "pa")
 	(SensorUnitLumen, "lumen");
 
 typedef boost::bimap<SensorPlacement, std::string> SensorPlacementStringType;
