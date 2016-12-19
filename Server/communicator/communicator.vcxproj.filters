@@ -21,6 +21,12 @@
     <ClCompile Include="HostFileReader.cpp">
       <Filter>communicator</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\SharedMemoryHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\RawQueue.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\SharedMemoryQueue.hpp">
@@ -31,6 +37,12 @@
     </ClInclude>
     <ClInclude Include="HostFileReader.hpp">
       <Filter>communicator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\SharedMemoryHelper.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\RawQueue.hpp">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
