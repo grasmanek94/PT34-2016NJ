@@ -38,7 +38,7 @@ SharedMemoryQueue::SharedMemoryQueue(const std::string& queue_name)
 		queue_name(queue_name),
 		deletion_fd_protection(-1)
 {
-	deletion_fd_protection = open(("/tmp/deletion_fd_protection.ipc_lockcheck." + queue_name).c_str(), O_CREAT | O_RDWR);
+	deletion_fd_protection = open(("/tmp/deletion_fd_protection.ipc_lockcheck." + queue_name).c_str(), O_CREAT | O_RDWR, 0666);
 	if (deletion_fd_protection == -1)
 	{
 		throw std::exception(/*"Cannot access critical lock file"*/);

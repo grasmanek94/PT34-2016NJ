@@ -18,7 +18,7 @@ namespace shared_memory_helper
 	template <typename T>
 	T shm_create(const std::string& shm_name, size_t size, int& shm_fd)
 	{
-		shm_fd = shm_open(shm_name.c_str(), O_CREAT | O_EXCL | O_RDWR, 0666);
+		shm_fd = ::shm_open(shm_name.c_str(), O_CREAT | O_EXCL | O_RDWR, 0666);
 		if (shm_fd == -1)
 		{
 			return NULL;
@@ -42,7 +42,7 @@ namespace shared_memory_helper
 	template <typename T>
 	T shm_open(const std::string& shm_name, int& shm_fd)
 	{
-		shm_fd = shm_open(shm_name.c_str(), O_RDWR, 0666);
+		shm_fd = ::shm_open(shm_name.c_str(), O_RDWR, 0666);
 		if (shm_fd == -1)
 		{
 			return NULL;

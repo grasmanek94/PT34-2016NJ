@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #include "Communicator.hpp"
 
 using websocketpp::lib::placeholders::_1;
@@ -74,7 +76,7 @@ void Communicator::Reconnect()
 	client::connection_ptr con = websocket_client.get_connection(host.GetHost(), ec);
 	if (ec)
 	{
-		throw std::exception(("could not create connection to \"" + host.GetHost() + "\" because: " + ec.message()).c_str());
+		throw std::runtime_error(("could not create connection to \"" + host.GetHost() + "\" because: " + ec.message()).c_str());
 	}
 
 	websocket_client.connect(con);

@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include <string>
 #include <semaphore.h>
 
@@ -5,7 +6,7 @@
 
 namespace shared_memory_helper
 {
-	void my_PrepSem(const std::string& name, sem_t** semaphore, int initial)
+	void PrepSem(const std::string& name, sem_t** semaphore, int initial)
 	{
 		*semaphore = sem_open(name.c_str(), O_CREAT | O_EXCL, 0666, initial);
 
@@ -14,7 +15,7 @@ namespace shared_memory_helper
 			*semaphore = sem_open(name.c_str(), 0);
 			if (*semaphore == SEM_FAILED)
 			{
-				throw std::exception(/*"Cannot access semaphore"*/);
+				throw std::runtime_error("Cannot access semaphore");
 			}
 		}
 	}
