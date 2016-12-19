@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Werror -O3 -Icommunicator -Isensor -Icommon -c -std=c++11
+CFLAGS=-Wall -Werror -O3 -pedantic -Icommunicator -Isensor -Icommon -c -std=c++11
 LDDFLAGS=-lrt -lpthread -pthread -lboost_system -lboost_filesystem
 
 COMMUNICATOR_SOURCES=$(wildcard common/*.cpp communicator/*.cpp)
