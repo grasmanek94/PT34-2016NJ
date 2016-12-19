@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{1bd07b17-311e-45ca-b4f0-81e74a5f1e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sensor">
+      <UniqueIdentifier>{d42d329a-684b-41a2-9e6f-15219c743e58}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\SharedMemoryQueue.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONable.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="Sensor.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="SensorData.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSetup.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="DummySensor.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecCommand.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="FirmwareInfo.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\SharedMemoryQueue.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONable.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sensor.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorData.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSetup.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="DummySensor.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecCommand.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="FirmwareInfo.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
