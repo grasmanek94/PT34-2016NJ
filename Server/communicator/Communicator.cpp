@@ -1,6 +1,7 @@
 #include <stdexcept>
 
 #include "Communicator.hpp"
+#include "RawQueue.hpp"
 
 using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
@@ -26,7 +27,23 @@ void Communicator::on_close(websocketpp::connection_hdl hdl)
 
 void Communicator::on_message(websocketpp::connection_hdl hdl, message_ptr msg)
 {
-	SharedMemoryQueueMessage message(msg->get_payload());
+	std::string payload(msg->get_payload());
+	if (payload.size() >= max_items_for_RawQueue)
+	{
+		websocket_client.send(hdl, "\
+		{\
+			\"errors\": [\
+				{\
+					\"status\": \"-2\",\
+						\"title\" : \"Message too long\",\
+						\"detail\" : \"The message exceeds the maximum size of " + std::to_string(max_items_for_RawQueue-1) + " characters.\"\
+				}\
+			]\
+		}", websocketpp::frame::opcode::text);
+		return;
+	}
+
+	SharedMemoryQueueMessage message(payload);
 	if (!in_queue.Push(&message))
 	{
 		websocket_client.send(hdl, "\
@@ -39,6 +56,7 @@ void Communicator::on_message(websocketpp::connection_hdl hdl, message_ptr msg)
 				}\
 			]\
 		}", websocketpp::frame::opcode::text);
+		return;
 	}
 }
 
