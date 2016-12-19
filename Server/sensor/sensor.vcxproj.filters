@@ -1,2 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{1bd07b17-311e-45ca-b4f0-81e74a5f1e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sensor">
+      <UniqueIdentifier>{d42d329a-684b-41a2-9e6f-15219c743e58}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
