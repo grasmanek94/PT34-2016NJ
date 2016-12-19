@@ -1,5 +1,5 @@
 CFLAGS=-Wall -Werror -O3 -Icommunicator -Isensor -Icommon -c -std=c++11
-LDDFLAGS=-lpthread -pthread 
+LDDFLAGS=-lrt -lpthread -pthread -lboost_system -lboost_filesystem
 
 COMMUNICATOR_SOURCES=$(wildcard common/*.cpp communicator/*.cpp)
 COMMUNICATOR_OBJECTS=$(COMMUNICATOR_SOURCES:.cpp=.o)

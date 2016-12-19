@@ -12,5 +12,25 @@
     <ClCompile Include="main.cpp">
       <Filter>communicator</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\SharedMemoryQueue.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="HostFileReader.cpp">
+      <Filter>communicator</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\SharedMemoryQueue.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="HostFileReader.hpp">
+      <Filter>communicator</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

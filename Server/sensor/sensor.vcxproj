@@ -19,7 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\SharedMemoryQueue.cpp" />
+    <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp" />
+    <ClCompile Include="DeviceSetup.cpp" />
+    <ClCompile Include="DummySensor.cpp" />
+    <ClCompile Include="ExecCommand.cpp" />
+    <ClCompile Include="FirmwareInfo.cpp" />
+    <ClCompile Include="JSONable.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sensor.cpp" />
+    <ClCompile Include="SensorData.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\SharedMemoryQueue.hpp" />
+    <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp" />
+    <ClInclude Include="DeviceSetup.hpp" />
+    <ClInclude Include="DummySensor.hpp" />
+    <ClInclude Include="ExecCommand.hpp" />
+    <ClInclude Include="FirmwareInfo.hpp" />
+    <ClInclude Include="JSONable.hpp" />
+    <ClInclude Include="Sensor.hpp" />
+    <ClInclude Include="SensorData.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6CDB92B2-3411-4A81-9EEA-D965FABDCE5C}</ProjectGuid>
@@ -92,7 +112,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Shared\websocketpp-master;.\;..\Shared;..\Shared\Bimap-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\common;..\sensor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -108,7 +128,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Shared\websocketpp-master;.\;..\Shared;..\Shared\Bimap-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\common;..\sensor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -126,7 +146,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Shared\websocketpp-master;.\;..\Shared;..\Shared\Bimap-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\common;..\sensor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -146,7 +166,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Shared\websocketpp-master;.\;..\Shared;..\Shared\Bimap-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\common;..\sensor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>

@@ -9,8 +9,64 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\SharedMemoryQueue.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONable.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>sensor</Filter>
     </ClCompile>
+    <ClCompile Include="Sensor.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="SensorData.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSetup.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="DummySensor.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecCommand.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="FirmwareInfo.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\SharedMemoryQueue.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONable.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="Sensor.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorData.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSetup.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="DummySensor.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecCommand.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="FirmwareInfo.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
