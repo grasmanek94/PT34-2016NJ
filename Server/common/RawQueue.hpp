@@ -3,7 +3,7 @@
 
 #include "SharedMemoryQueueMessage.hpp"
 
-static const size_t max_items_for_RawQueue = 128;
+static const size_t max_items_for_RawQueue = 256;
 
 class RawQueue
 {

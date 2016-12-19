@@ -3,7 +3,7 @@
 
 #include <string>
 
-static const size_t max_data_size_bytes_for_QueueItem = 2048;
+static const size_t max_data_size_bytes_for_QueueItem = 16384;
 
 class SharedMemoryQueueMessage
 {

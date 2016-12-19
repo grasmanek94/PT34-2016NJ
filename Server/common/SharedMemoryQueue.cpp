@@ -92,6 +92,10 @@ SharedMemoryQueue::SharedMemoryQueue(const std::string& queue_name)
 
 bool SharedMemoryQueue::Push(SharedMemoryQueueMessage* item)
 {
+	if (queue_shared_memory->Count() == queue_shared_memory->MaxCount())
+	{
+		return false;
+	}
 	Wait();
 	bool ret_val = queue_shared_memory->Push(item);
 	Post();
@@ -101,6 +105,10 @@ bool SharedMemoryQueue::Push(SharedMemoryQueueMessage* item)
 
 bool SharedMemoryQueue::Pop(SharedMemoryQueueMessage* item)
 {
+	if (queue_shared_memory->Count() == 0)
+	{
+		return false;
+	}
 	sem_wait(elem_count_semaphore);
 	Wait();
 	bool ret_val = queue_shared_memory->Pop(item);
@@ -110,7 +118,7 @@ bool SharedMemoryQueue::Pop(SharedMemoryQueueMessage* item)
 
 bool SharedMemoryQueue::TryPush(SharedMemoryQueueMessage* item)
 {
-	if (!TryWait())
+	if (queue_shared_memory->Count() == queue_shared_memory->MaxCount() || !TryWait())
 	{
 		return false;
 	}
@@ -122,7 +130,7 @@ bool SharedMemoryQueue::TryPush(SharedMemoryQueueMessage* item)
 
 bool SharedMemoryQueue::TryPop(SharedMemoryQueueMessage* item)
 {
-	if (sem_trywait(queue_operation_semaphore) != 0)
+	if (queue_shared_memory->Count() == 0 || sem_trywait(queue_operation_semaphore) != 0)
 	{
 		return false;
 	}

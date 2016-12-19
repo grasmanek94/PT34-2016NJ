@@ -32,7 +32,6 @@ public:
 	bool TryPush(SharedMemoryQueueMessage* item);
 	bool TryPop(SharedMemoryQueueMessage* item);
 
-
 	size_t Count() const;
 };
 
