@@ -27,6 +27,9 @@
     <ClCompile Include="..\common\RawQueue.cpp">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="Communicator.cpp">
+      <Filter>communicator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\SharedMemoryQueue.hpp">
@@ -43,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="..\common\RawQueue.hpp">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="Communicator.hpp">
+      <Filter>communicator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

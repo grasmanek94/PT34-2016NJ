@@ -23,6 +23,7 @@
     <ClCompile Include="..\common\SharedMemoryHelper.cpp" />
     <ClCompile Include="..\common\SharedMemoryQueue.cpp" />
     <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp" />
+    <ClCompile Include="Communicator.cpp" />
     <ClCompile Include="HostFileReader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -31,6 +32,7 @@
     <ClInclude Include="..\common\SharedMemoryHelper.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueue.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp" />
+    <ClInclude Include="Communicator.hpp" />
     <ClInclude Include="HostFileReader.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -24,7 +24,7 @@
     <ClCompile Include="..\common\SharedMemoryQueue.cpp" />
     <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp" />
     <ClCompile Include="DeviceSetup.cpp" />
-    <ClCompile Include="DummySensor.cpp" />
+    <ClCompile Include="SerialConnectionSensor.cpp" />
     <ClCompile Include="ExecCommand.cpp" />
     <ClCompile Include="FirmwareInfo.cpp" />
     <ClCompile Include="JSONable.cpp" />
@@ -38,7 +38,7 @@
     <ClInclude Include="..\common\SharedMemoryQueue.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp" />
     <ClInclude Include="DeviceSetup.hpp" />
-    <ClInclude Include="DummySensor.hpp" />
+    <ClInclude Include="SerialConnectionSensor.hpp" />
     <ClInclude Include="ExecCommand.hpp" />
     <ClInclude Include="FirmwareInfo.hpp" />
     <ClInclude Include="JSONable.hpp" />

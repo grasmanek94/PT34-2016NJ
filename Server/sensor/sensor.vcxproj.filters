@@ -30,9 +30,6 @@
     <ClCompile Include="DeviceSetup.cpp">
       <Filter>sensor</Filter>
     </ClCompile>
-    <ClCompile Include="DummySensor.cpp">
-      <Filter>sensor</Filter>
-    </ClCompile>
     <ClCompile Include="ExecCommand.cpp">
       <Filter>sensor</Filter>
     </ClCompile>
@@ -44,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="..\common\RawQueue.cpp">
       <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialConnectionSensor.cpp">
+      <Filter>sensor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,9 +65,6 @@
     <ClInclude Include="DeviceSetup.hpp">
       <Filter>sensor</Filter>
     </ClInclude>
-    <ClInclude Include="DummySensor.hpp">
-      <Filter>sensor</Filter>
-    </ClInclude>
     <ClInclude Include="ExecCommand.hpp">
       <Filter>sensor</Filter>
     </ClInclude>
@@ -79,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="..\common\RawQueue.hpp">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialConnectionSensor.hpp">
+      <Filter>sensor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
