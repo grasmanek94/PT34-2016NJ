@@ -23,4 +23,4 @@ all: communicator.bin sensor.bin
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	@rm -rf communicator.bin sensor.bin communicator/*.o sensor/*.o
+	@rm -rf communicator/*.o sensor/*.o common/*.o communicator.bin sensor.bin 
