@@ -1,9 +1,52 @@
 #include "LightSensor.h"
 
-LightSensor::LightSensor()
+LightSensor::LightSensor(&IMesurementSink MesurementSink , int tagetInterval)
+:sink(MesurementSink)
 {
   Wire.begin();
+  placement = "buiten";
+  position = "bovenop";
   address = 0x23;
+  readDelay = 150;
+  reading = false;
+  setTargetInterval(targetInterval);
+}
+
+void LightSensor::run()
+{
+  if(!reading && millis()>time+interval)
+  {
+    requestData();
+    time = millis();
+  }
+  elseif(reading && millis()>time+readDelay)
+  {
+    uint16_t 
+    readData()
+  }
+}
+
+void LightSensor::setTargetInterval(int targetInterval)
+{
+  if(targetInterval>readDelay)
+  {
+    interval = targetInterval;
+  }
+}
+
+int LightSensorgetTargetInterval()
+{
+  return interval;
+}
+
+String LightSensorgetPlacement()
+{
+  return placement;
+}
+
+String LightSensorgetPosition()
+{
+  return position;
 }
 
 void LightSensor::requestData()
@@ -15,7 +58,6 @@ Wire.endTransmission();
 //delay hier
 uint16_t LightSensor::readData()
 {
-  char buff[2];
   uint16_t val = 0;
   int i = 0;
   Wire.beginTransmission(address);
@@ -23,17 +65,12 @@ uint16_t LightSensor::readData()
   while (Wire.available()) //
   {
     val<<=8;
-    val += Wire.read(); // receive one byte
+    val += Wire.read();
     i++;
   }
   Wire.endTransmission();
   if (i == 2)
-  {/*
-    val = ((buff[0] << 8) | buff[1]) / 1.2;
-    if(val>60000)
-    { 
-      val = 0;
-    }*/
+  {
     val /= 1.2;
     return val;
   }
