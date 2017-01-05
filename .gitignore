@@ -252,3 +252,5 @@ paket-files/
 *.sln.iml
 Server/Example_Server.exe
 Server/host.txt
+
+build-MeasurementUnit-Desktop_Qt_5_7_0_GCC_64bit-Default
