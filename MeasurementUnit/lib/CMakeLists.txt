@@ -18,6 +18,8 @@ set(HEADER
     "${INCLUDE_DIR_LL}/ISensor.hpp"
     "${INCLUDE_DIR_LL}/IMeasurementSink.hpp"
     "${INCLUDE_DIR_LL}/Measurement.hpp"
+    "${INCLUDE_DIR_LL}/Testing/ISensorMock.hpp"
+    "${INCLUDE_DIR_LL}/Testing/IMeasurementSinkMock.hpp"
    )
 
 add_library(${PROJECT_NAME} ${SOURCE} ${HEADER})
