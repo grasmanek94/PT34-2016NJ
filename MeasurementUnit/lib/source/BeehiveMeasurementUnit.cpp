@@ -1,7 +1,7 @@
 
 #include <SmartBeeHive/BeehiveMeasurementUnit.hpp>
 
-BeehiveMeasurementUnit::BeehiveMeasurementUnit(size_t nrSensors, ISensor* sensors)
+BeehiveMeasurementUnit::BeehiveMeasurementUnit(size_t nrSensors, ISensor** sensors)
     :_nrSensors(nrSensors), _sensors(sensors), _running(false)
 {
 
@@ -21,10 +21,12 @@ void BeehiveMeasurementUnit::run()
 {
     if(_running)
     {
+        ISensor** _sensorsCopy = _sensors;
+
         for(int i = 0; i < _nrSensors; i++)
         {
-            _sensors->run();
-            _sensors++;
+            (*_sensorsCopy)->run();
+            _sensorsCopy++;
         }
     }
 }

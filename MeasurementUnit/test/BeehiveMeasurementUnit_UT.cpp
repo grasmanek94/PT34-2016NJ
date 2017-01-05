@@ -5,18 +5,24 @@
 #include <SmartBeeHive/BeehiveMeasurementUnit.hpp>
 
 using namespace testing;
-
-///@todo Design an interface for timesources so those can be mocked
+using namespace Testing;
 
 TEST(BeehiveMeasurementTest, executeSensor)
 {
-    Testing::IMeasurementSinkMock sink;
-    char keyword[255] = "mock sensor";
+    MeasurementSinkMock sink;
 
-    Testing::ISensorMock sensor(sink, 100, keyword);
-    BeehiveMeasurementUnit beehive(1, &sensor);
+    char keyword1[255] = "mock sensor 1";
+    SensorMock sensor1(sink, 100, keyword1);
 
-    EXPECT_CALL(sensor, run());
+    char keyword2[255] = "mock sensor 2";
+    SensorMock sensor2(sink, 100, keyword2);
+
+    SensorMock* sensors[] = {&sensor1, &sensor2};
+
+    BeehiveMeasurementUnit beehive(2, (ISensor**)sensors);
+
+    EXPECT_CALL(sensor1, run());
+    EXPECT_CALL(sensor2, run());
 
     beehive.init();
 

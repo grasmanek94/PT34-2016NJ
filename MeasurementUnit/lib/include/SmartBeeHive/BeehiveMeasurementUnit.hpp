@@ -7,7 +7,7 @@
 
 class BeehiveMeasurementUnit {
 public:
-    BeehiveMeasurementUnit(size_t nrSensors, ISensor* _sensor);
+    BeehiveMeasurementUnit(size_t nrSensors, ISensor** _sensor);
     virtual ~BeehiveMeasurementUnit();
 
     void init();
@@ -17,7 +17,7 @@ public:
 
 private:
     size_t _nrSensors;
-    ISensor* _sensors;
+    ISensor** _sensors;
     bool _running;
 };
 

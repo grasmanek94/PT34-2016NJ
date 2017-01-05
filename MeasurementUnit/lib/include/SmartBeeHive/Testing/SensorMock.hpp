@@ -1,5 +1,5 @@
-#ifndef ISENSOR_MOCK_HPP_
-#define ISENSOR_MOCK_HPP_
+#ifndef SENSOR_MOCK_HPP_
+#define SENSOR_MOCK_HPP_
 
 #include "gmock/gmock.h"
 #include <SmartBeeHive/ISensor.hpp>
@@ -7,9 +7,9 @@
 
 namespace Testing {
 
-class ISensorMock : public ISensor {
+class SensorMock : public ISensor {
 public:
-    ISensorMock(IMeasurementSinkMock& sink, int targetInterval, char* key) : ISensor(sink, targetInterval, key) { }
+    SensorMock(MeasurementSinkMock& sink, int targetInterval, char* key) : ISensor(sink, targetInterval, key) { }
 
     MOCK_METHOD0(run, void());
     MOCK_METHOD0(getKeyword, char*());
@@ -18,4 +18,4 @@ public:
 
 } // namespace Testing
 
-#endif // ISENSOR_MOCK_HPP_
+#endif // SENSOR_MOCK_HPP_
