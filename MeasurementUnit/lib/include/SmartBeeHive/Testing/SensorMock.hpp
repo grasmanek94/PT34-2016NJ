@@ -3,7 +3,7 @@
 
 #include "gmock/gmock.h"
 #include <SmartBeeHive/ISensor.hpp>
-#include <SmartBeeHive/Testing/IMeasurementSinkMock.hpp>
+#include <SmartBeeHive/Testing/MeasurementSinkMock.hpp>
 
 namespace Testing {
 

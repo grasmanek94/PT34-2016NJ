@@ -10,6 +10,8 @@ include_directories(${INCLUDE_DIR}
 set(SOURCE
     "${SOURCE_DIR}/BeehiveMeasurementUnit.cpp"
     "${SOURCE_DIR}/Measurement.cpp"
+    "${SOURCE_DIR}/SerialSender.cpp"
+    "${SOURCE_DIR}/Packet.cpp"
    )
 
 
@@ -20,6 +22,8 @@ set(HEADER
     "${INCLUDE_DIR_LL}/Measurement.hpp"
     "${INCLUDE_DIR_LL}/Testing/SensorMock.hpp"
     "${INCLUDE_DIR_LL}/Testing/MeasurementSinkMock.hpp"
+    "${INCLUDE_DIR_LL}/SerialSender.hpp"
+    "${INCLUDE_DIR_LL}/Packet.hpp"
    )
 
 add_library(${PROJECT_NAME} ${SOURCE} ${HEADER})

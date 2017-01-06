@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-#include <SmartBeeHive/Testing/ISensorMock.hpp>
+#include <SmartBeeHive/Testing/SensorMock.hpp>
 #include <SmartBeeHive/BeehiveMeasurementUnit.hpp>
 
 using namespace testing;
