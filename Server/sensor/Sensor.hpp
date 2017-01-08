@@ -74,7 +74,6 @@ private:
 	double min_value;
 	double max_value;
 public:
-	Sensor();
 	Sensor(SensorType _type, SensorUnit _unit, SensorPlacement _placement, size_t _num_values, double min_value, double max_value, const Position& _position);
 	virtual ~Sensor();
 
@@ -89,5 +88,5 @@ public:
 	virtual double GetMinValue() const;
 	virtual double GetMaxValue() const;
 
-	virtual bool SetValue(double value, size_t i = 0) = 0;
+	virtual void SetValue(double value, size_t i = 0) = 0;
 };

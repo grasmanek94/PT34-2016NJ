@@ -27,9 +27,6 @@
     <ClCompile Include="SensorData.cpp">
       <Filter>sensor</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceSetup.cpp">
-      <Filter>sensor</Filter>
-    </ClCompile>
     <ClCompile Include="ExecCommand.cpp">
       <Filter>sensor</Filter>
     </ClCompile>
@@ -42,11 +39,17 @@
     <ClCompile Include="..\common\RawQueue.cpp">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="SerialConnectionSensor.cpp">
-      <Filter>sensor</Filter>
-    </ClCompile>
     <ClCompile Include="Processor.cpp">
       <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="Device.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleSensor.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Timer.cpp">
+      <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,9 +68,6 @@
     <ClInclude Include="SensorData.hpp">
       <Filter>sensor</Filter>
     </ClInclude>
-    <ClInclude Include="DeviceSetup.hpp">
-      <Filter>sensor</Filter>
-    </ClInclude>
     <ClInclude Include="ExecCommand.hpp">
       <Filter>sensor</Filter>
     </ClInclude>
@@ -80,11 +80,17 @@
     <ClInclude Include="..\common\RawQueue.hpp">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="SerialConnectionSensor.hpp">
-      <Filter>sensor</Filter>
-    </ClInclude>
     <ClInclude Include="Processor.hpp">
       <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="Device.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleSensor.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Timer.hpp">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

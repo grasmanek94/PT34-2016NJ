@@ -23,9 +23,10 @@
     <ClCompile Include="..\common\SharedMemoryHelper.cpp" />
     <ClCompile Include="..\common\SharedMemoryQueue.cpp" />
     <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp" />
-    <ClCompile Include="DeviceSetup.cpp" />
+    <ClCompile Include="..\common\Timer.cpp" />
+    <ClCompile Include="Device.cpp" />
     <ClCompile Include="Processor.cpp" />
-    <ClCompile Include="SerialConnectionSensor.cpp" />
+    <ClCompile Include="SimpleSensor.cpp" />
     <ClCompile Include="ExecCommand.cpp" />
     <ClCompile Include="FirmwareInfo.cpp" />
     <ClCompile Include="JSONable.cpp" />
@@ -38,9 +39,10 @@
     <ClInclude Include="..\common\SharedMemoryHelper.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueue.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp" />
-    <ClInclude Include="DeviceSetup.hpp" />
+    <ClInclude Include="..\common\Timer.hpp" />
+    <ClInclude Include="Device.hpp" />
     <ClInclude Include="Processor.hpp" />
-    <ClInclude Include="SerialConnectionSensor.hpp" />
+    <ClInclude Include="SimpleSensor.hpp" />
     <ClInclude Include="ExecCommand.hpp" />
     <ClInclude Include="FirmwareInfo.hpp" />
     <ClInclude Include="JSONable.hpp" />

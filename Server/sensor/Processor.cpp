@@ -2,8 +2,9 @@
 #include <thread>
 #include <json/json.hpp>
 #include "Processor.hpp"
-#include "SerialConnectionSensor.hpp"
+#include "SimpleSensor.hpp"
 #include "SensorData.hpp"
+#include <Timer.hpp>
 
 using namespace nlohmann;
 volatile sig_atomic_t done = 0;
@@ -18,13 +19,13 @@ Processor::Processor()
 	device(
 		DevCapabilities_3g | DevCapabilities_bluetooth30 | DevCapabilities_ethernet100m,
 		{
-			new SerialConnectionSensor(SensorTypeTemperature, SensorUnitDegreesCelsius, SensorPlacementInside, 1, -100.0, 200.0, Position{ 3.0, 10.0, -10.6 }),
-			new SerialConnectionSensor(SensorTypeTemperature, SensorUnitDegreesCelsius, SensorPlacementInside, 1, -100.0, 200.0, Position{ 4.0, 10.0, -10.5 }),
-			new SerialConnectionSensor(SensorTypeTemperature, SensorUnitDegreesCelsius, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 5.0, 10.0, -10.4 }),
-			new SerialConnectionSensor(SensorTypeHumidity, SensorUnitPercent, SensorPlacementInside, 1, -100.0, 200.0, Position{ 6.0, 10.0, -10.3 }),
-			new SerialConnectionSensor(SensorTypeHumidity, SensorUnitPercent, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 7.0, 10.0, -10.2 }),
-			new SerialConnectionSensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementInside, 1, -100.0, 200.0, Position{ 8.0, 10.0, -10.1 }),
-			new SerialConnectionSensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 9.0, 10.0, -10.0 })
+			new SimpleSensor(SensorTypeTemperature, SensorUnitDegreesCelsius, SensorPlacementInside, 1, -100.0, 200.0, Position{ 3.0, 10.0, -10.6 }),
+			new SimpleSensor(SensorTypeTemperature, SensorUnitDegreesCelsius, SensorPlacementInside, 1, -100.0, 200.0, Position{ 4.0, 10.0, -10.5 }),
+			new SimpleSensor(SensorTypeTemperature, SensorUnitDegreesCelsius, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 5.0, 10.0, -10.4 }),
+			new SimpleSensor(SensorTypeHumidity, SensorUnitPercent, SensorPlacementInside, 1, -100.0, 200.0, Position{ 6.0, 10.0, -10.3 }),
+			new SimpleSensor(SensorTypeHumidity, SensorUnitPercent, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 7.0, 10.0, -10.2 }),
+			new SimpleSensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementInside, 1, -100.0, 200.0, Position{ 8.0, 10.0, -10.1 }),
+			new SimpleSensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 9.0, 10.0, -10.0 })
 		})
 {
 	static bool terminator_initialized = false;
@@ -46,6 +47,9 @@ Processor::~Processor()
 void Processor::Run()
 {
 	SharedMemoryQueueMessage message;
+	Timer data_send_timer;
+
+	data_send_timer.Start();
 
 	while (!done)
 	{
@@ -61,17 +65,23 @@ void Processor::Run()
 				message.Set(device.GetResponseJson());
 				out_queue.Push(&message);
 			}
+		}
 
-			auto get_sensor_data = j.find("GetSensorData");
-			if (get_sensor_data != j.end())
-			{
-				SensorData data(&device);
-				data.ParseRequestJson(j.dump());
+		if (data_send_timer.ElapsedMilliseconds() > 10000)
+		{
+			data_send_timer.Restart();
 
-				// send to belgie
-				message.Set(data.GetResponseJson());
-				out_queue.Push(&message);
-			}
+			SensorData data(&device);
+			data.ParseRequestJson("{}");
+
+			// send to belgie
+			message.Set(data.GetResponseJson());
+			out_queue.Push(&message);
+		}
+
+		// update values from serial / arduino here
+		{
+			// todo
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));

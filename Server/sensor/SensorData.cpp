@@ -8,7 +8,7 @@
 
 using json = nlohmann::json;
 
-SensorData::SensorData(DeviceSetup* setup)
+SensorData::SensorData(Device* setup)
 	: setup(setup)
 {
 	if (setup == NULL)
@@ -28,10 +28,21 @@ std::string SensorData::GetRequestJson() const
 	return request_text;
 }
 
+//if empty json in ParseRequest then everything is returned
 std::string SensorData::GetResponseJson() const
 {
 	// TODO: add errors here or to parse request
 	std::map <std::string, json> sensor_data;
+
+	if (request_sensors.empty())
+	{
+		request_sensors[SensorTypeTemperature];
+		request_sensors[SensorTypeSound];
+		request_sensors[SensorTypeWeight];
+		request_sensors[SensorTypeHumidity];
+		request_sensors[SensorTypePressure];
+		request_sensors[SensorTypeLightIntensity];
+	}
 
 	for (auto& sens_entry : request_sensors)
 	{
