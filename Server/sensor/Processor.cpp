@@ -17,7 +17,7 @@ void term(int signum)
 Processor::Processor()
 	: in_queue("in_webscktmsg"), out_queue("out_webscktmsg"),
 	device(
-		DevCapabilities_3g | DevCapabilities_bluetooth30 | DevCapabilities_ethernet100m,
+		DevCapabilities_ethernet100m,
 		{
 			new SimpleSensor(SensorTypeTemperature, SensorUnitDegreesCelsius, SensorPlacementInside, 1, -100.0, 200.0, Position{ 3.0, 10.0, -10.6 }),
 			new SimpleSensor(SensorTypeTemperature, SensorUnitDegreesCelsius, SensorPlacementInside, 1, -100.0, 200.0, Position{ 4.0, 10.0, -10.5 }),
