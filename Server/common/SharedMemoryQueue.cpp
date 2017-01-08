@@ -33,7 +33,6 @@ SharedMemoryQueue::SharedMemoryQueue(const std::string& queue_name)
 	:	queue_shared_memory(NULL),
 		queue_operation_semaphore(SEM_FAILED),
 		memory_prepare_semaphore(SEM_FAILED),
-		elem_count_semaphore(SEM_FAILED),
 		shm_fd(-1),
 		queue_name(queue_name),
 		deletion_fd_protection(-1)
@@ -66,7 +65,6 @@ SharedMemoryQueue::SharedMemoryQueue(const std::string& queue_name)
 		}
 	}
 
-	shared_memory_helper::PrepSem("ITEM_COUNTER_" + queue_name, &elem_count_semaphore, 0);
 	shared_memory_helper::PrepSem("SHM_PROT_" + queue_name, &memory_prepare_semaphore, 1);
 	shared_memory_helper::PrepSem(queue_name, &queue_operation_semaphore, 1);
 
@@ -99,7 +97,6 @@ bool SharedMemoryQueue::Push(SharedMemoryQueueMessage* item)
 	Wait();
 	bool ret_val = queue_shared_memory->Push(item);
 	Post();
-	sem_post(elem_count_semaphore);
 	return ret_val;
 }
 
@@ -109,7 +106,6 @@ bool SharedMemoryQueue::Pop(SharedMemoryQueueMessage* item)
 	{
 		return false;
 	}
-	sem_wait(elem_count_semaphore);
 	Wait();
 	bool ret_val = queue_shared_memory->Pop(item);
 	Post();
@@ -124,7 +120,6 @@ bool SharedMemoryQueue::TryPush(SharedMemoryQueueMessage* item)
 	}
 	bool ret_val = queue_shared_memory->Push(item);
 	Post();
-	sem_post(elem_count_semaphore);
 	return ret_val;
 }
 
@@ -134,10 +129,8 @@ bool SharedMemoryQueue::TryPop(SharedMemoryQueueMessage* item)
 	{
 		return false;
 	}
-	sem_wait(elem_count_semaphore);
 	if (!TryWait())
 	{
-		sem_post(elem_count_semaphore);
 		return false;
 	}
 	bool ret_val = queue_shared_memory->Pop(item);
@@ -147,10 +140,18 @@ bool SharedMemoryQueue::TryPop(SharedMemoryQueueMessage* item)
 
 size_t SharedMemoryQueue::Count() const
 {
-	int count = 0;
-	sem_getvalue(elem_count_semaphore, &count);
-	return (size_t)count;
-	//return queue_shared_memory->Count();
+	return queue_shared_memory->Count();
+}
+
+void SharedMemoryQueue::Clear()
+{
+	if (queue_shared_memory->Count() == 0)
+	{
+		return;
+	}
+	Wait();
+	queue_shared_memory->Clear();
+	Post();
 }
 
 SharedMemoryQueue::~SharedMemoryQueue()

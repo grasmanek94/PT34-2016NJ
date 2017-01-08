@@ -17,6 +17,14 @@ void term(int signum)
 void Communicator::on_open(websocketpp::connection_hdl hdl)
 {
 	connections.insert(hdl);
+
+	// because for now only 1 outgoing connection at once
+	in_queue.Clear();
+	out_queue.Clear();
+
+	// make the other process send the DeviceInfo after connecting, nice uh?
+	SharedMemoryQueueMessage message(std::string("{\"GetDeviceSetup\":null}"));
+	in_queue.Push(&message);
 }
 
 void Communicator::on_close(websocketpp::connection_hdl hdl)

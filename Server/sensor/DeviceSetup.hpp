@@ -70,17 +70,16 @@ public:
 	using sensors_container_t = std::vector<Sensor*>;
 	using sensors_list_t = std::map<SensorType, sensors_container_t>;
 private:
+	FirmwareInfo fwinfo;
 	std::string serial;
 	sensors_list_t sensors;
 	size_t capabilities;
 	const static size_t protocol_revision = 3;
-	FirmwareInfo fwinfo;
 public:
 	DeviceSetup();
 	DeviceSetup(const std::string& _serial, size_t capabilities, std::initializer_list<Sensor*> sensors = {});
 	~DeviceSetup();
 
-	void SetSerial(const std::string& _serial);
 	std::string GetSerial() const;
 
 	bool AddSensor(Sensor* sensor);

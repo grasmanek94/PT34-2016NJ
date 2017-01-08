@@ -62,3 +62,10 @@ size_t RawQueue::MaxBytesPerElem()
 {
 	return max_data_size_bytes_for_QueueItem;
 }
+
+void RawQueue::Clear()
+{
+	count = 0;
+	pushed = 0;
+	popped = 0;
+}

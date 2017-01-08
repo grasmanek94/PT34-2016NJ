@@ -9,4 +9,5 @@ public:
 
 	std::string GetOSInfo() const;
 	std::string GetMeasurementInfo() const;
+	std::string GetSerial() const;
 };

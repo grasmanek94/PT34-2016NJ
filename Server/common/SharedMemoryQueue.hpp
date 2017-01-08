@@ -12,7 +12,6 @@ private:
 	RawQueue* queue_shared_memory;
 	sem_t* queue_operation_semaphore;
 	sem_t* memory_prepare_semaphore;
-	sem_t* elem_count_semaphore;
 	int shm_fd;
 	std::string queue_name;
 	int deletion_fd_protection;
@@ -33,6 +32,7 @@ public:
 	bool TryPop(SharedMemoryQueueMessage* item);
 
 	size_t Count() const;
+	void Clear();
 };
 
 #endif

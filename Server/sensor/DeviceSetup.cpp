@@ -12,7 +12,7 @@ DeviceSetup::DeviceSetup()
 }
 
 DeviceSetup::DeviceSetup(const std::string& serial, size_t capabilities, std::initializer_list<Sensor*> sensors_list)
-	: serial(serial), capabilities(capabilities)
+	: serial(fwinfo.GetSerial()), capabilities(capabilities)
 {
 	for (auto &sensor : sensors_list)
 	{
@@ -181,6 +181,7 @@ void DeviceSetup::ParseResponseJson(const std::string& _json)
 		}
 
 		// TODO: finish this function to be able to construct DeviceSetup object completely from a JSON formatted string
+		// ON SECOND THOUGHT: We never use this function, when testing is going to be needed this function needs to be finished
 		auto devices_found = device_setup->find("devices");
 		sensors.clear();
 		if (devices_found != device_setup->end())
@@ -192,11 +193,6 @@ void DeviceSetup::ParseResponseJson(const std::string& _json)
 			
 		}
 	}
-}
-
-void DeviceSetup::SetSerial(const std::string& _serial)
-{
-	serial = _serial;
 }
 
 std::string DeviceSetup::GetSerial() const

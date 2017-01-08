@@ -21,6 +21,7 @@ public:
 	static size_t GetSizeBytes();
 	static size_t MaxCount();
 	static size_t MaxBytesPerElem();
+	void Clear();
 };
 
 #endif
