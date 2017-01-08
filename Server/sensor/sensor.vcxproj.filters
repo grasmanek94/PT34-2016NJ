@@ -45,6 +45,9 @@
     <ClCompile Include="SerialConnectionSensor.cpp">
       <Filter>sensor</Filter>
     </ClCompile>
+    <ClCompile Include="Processor.cpp">
+      <Filter>sensor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp">
@@ -78,6 +81,9 @@
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="SerialConnectionSensor.hpp">
+      <Filter>sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="Processor.hpp">
       <Filter>sensor</Filter>
     </ClInclude>
   </ItemGroup>

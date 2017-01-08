@@ -22,7 +22,7 @@ enum SensorUnit
 	SensorUnitKilograms,
 	SensorUnitPercent,
 	SensorUnitPascal,
-	SensorUnitLumen
+	SensorUnitLux
 };
 
 enum SensorPlacement
@@ -49,7 +49,7 @@ const static SensorUnitStringType SensorUnitStrings = boost::assign::list_of< Se
 	(SensorUnitKilograms, "kg")
 	(SensorUnitPercent, "%")
 	(SensorUnitPascal, "pa")
-	(SensorUnitLumen, "lumen");
+	(SensorUnitLux, "lx");
 
 typedef boost::bimap<SensorPlacement, std::string> SensorPlacementStringType;
 const static SensorPlacementStringType SensorPlacementStrings = boost::assign::list_of< SensorPlacementStringType::relation >

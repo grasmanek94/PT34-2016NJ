@@ -1,6 +1,7 @@
 #include <thread>
 #include <csignal>
 #include <iostream>
+#include "Processor.hpp"
 volatile extern sig_atomic_t done = 0;
 
 int main()
@@ -9,7 +10,8 @@ int main()
 	{
 		try
 		{
-
+			Processor processor;
+			processor.Run();
 		}
 		catch (std::exception const & e)
 		{

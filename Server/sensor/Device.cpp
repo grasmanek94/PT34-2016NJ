@@ -2,16 +2,16 @@
 #include <boost/filesystem.hpp>
 using namespace boost::filesystem;
 
-#include "DeviceSetup.hpp"
+#include "Device.hpp"
 
 using json = nlohmann::json;
 
-DeviceSetup::DeviceSetup()
+Device::Device()
 {
 
 }
 
-DeviceSetup::DeviceSetup(const std::string& serial, size_t capabilities, std::initializer_list<Sensor*> sensors_list)
+Device::Device(size_t capabilities, std::initializer_list<Sensor*> sensors_list)
 	: serial(fwinfo.GetSerial()), capabilities(capabilities)
 {
 	for (auto &sensor : sensors_list)
@@ -20,12 +20,12 @@ DeviceSetup::DeviceSetup(const std::string& serial, size_t capabilities, std::in
 	}
 }
 
-DeviceSetup::~DeviceSetup()
+Device::~Device()
 {
 	CleanSensors();
 }
 
-std::string DeviceSetup::GetRequestJson() const
+std::string Device::GetRequestJson() const
 {
 	const static json j
 	{
@@ -36,7 +36,7 @@ std::string DeviceSetup::GetRequestJson() const
 	return request_text;
 }
 
-void DeviceSetup::ParseRequestJson(const std::string& _json)
+void Device::ParseRequestJson(const std::string& _json)
 {
 	const json j = json::parse(_json.c_str());
 	//cleanup
@@ -48,7 +48,7 @@ void DeviceSetup::ParseRequestJson(const std::string& _json)
 	}
 }
 
-std::string DeviceSetup::GetResponseJson() const
+std::string Device::GetResponseJson() const
 {
 	space_info si = space(".");
 
@@ -127,7 +127,7 @@ std::string DeviceSetup::GetResponseJson() const
 	return j.dump();
 }
 
-void DeviceSetup::CleanSensors()
+void Device::CleanSensors()
 {
 	for (auto& sensor_type : sensors)
 	{
@@ -140,7 +140,7 @@ void DeviceSetup::CleanSensors()
 	sensors.clear();
 }
 
-Sensor* DeviceSetup::GetSensor(SensorType type, size_t index) const
+Sensor* Device::GetSensor(SensorType type, size_t index) const
 {
 	auto sensor_vec = sensors.find(type);
 
@@ -152,7 +152,7 @@ Sensor* DeviceSetup::GetSensor(SensorType type, size_t index) const
 	return sensor_vec->second[index];
 }
 
-size_t DeviceSetup::GetSensorCount(SensorType type) const
+size_t Device::GetSensorCount(SensorType type) const
 {
 	auto sensor_vec = sensors.find(type);
 
@@ -164,7 +164,7 @@ size_t DeviceSetup::GetSensorCount(SensorType type) const
 	return sensor_vec->second.size();
 }
 
-void DeviceSetup::ParseResponseJson(const std::string& _json)
+void Device::ParseResponseJson(const std::string& _json)
 {
 	const json j = json::parse(_json.c_str());
 	auto device_setup = j.find("GetDeviceSetup");
@@ -180,7 +180,7 @@ void DeviceSetup::ParseResponseJson(const std::string& _json)
 			serial = "UNKNOWN";
 		}
 
-		// TODO: finish this function to be able to construct DeviceSetup object completely from a JSON formatted string
+		// TODO: finish this function to be able to construct Device object completely from a JSON formatted string
 		// ON SECOND THOUGHT: We never use this function, when testing is going to be needed this function needs to be finished
 		auto devices_found = device_setup->find("devices");
 		sensors.clear();
@@ -195,12 +195,12 @@ void DeviceSetup::ParseResponseJson(const std::string& _json)
 	}
 }
 
-std::string DeviceSetup::GetSerial() const
+std::string Device::GetSerial() const
 {
 	return serial;
 }
 
-bool DeviceSetup::AddSensor(Sensor* sensor)
+bool Device::AddSensor(Sensor* sensor)
 {
 	if (sensor == NULL)
 	{
@@ -219,22 +219,22 @@ bool DeviceSetup::AddSensor(Sensor* sensor)
 	return true;
 }
 
-void DeviceSetup::AddCapability(size_t capability)
+void Device::AddCapability(size_t capability)
 {
 	capabilities |= capability;
 }
 
-void DeviceSetup::RemoveCapability(size_t capability)
+void Device::RemoveCapability(size_t capability)
 {
 	capabilities &= ~(capability);
 }
 
-bool DeviceSetup::HasCapability(size_t capability) const
+bool Device::HasCapability(size_t capability) const
 {
 	return (capabilities & capability) != 0;
 }
 
-size_t DeviceSetup::GetCapabilities() const
+size_t Device::GetCapabilities() const
 {
 	return (size_t)capabilities;
 }

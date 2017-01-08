@@ -64,7 +64,7 @@ const static DevCapabilitiesStringType DevCapabilitiesStrings = boost::assign::l
 	(DevCapabilities_bluetooth42, "bluetooth42")
 	(DevCapabilities_bluetooth5, "bluetooth50");
 
-class DeviceSetup : public JSONable
+class Device : public JSONable
 {
 public:
 	using sensors_container_t = std::vector<Sensor*>;
@@ -76,9 +76,9 @@ private:
 	size_t capabilities;
 	const static size_t protocol_revision = 3;
 public:
-	DeviceSetup();
-	DeviceSetup(const std::string& _serial, size_t capabilities, std::initializer_list<Sensor*> sensors = {});
-	~DeviceSetup();
+	Device();
+	Device(size_t capabilities, std::initializer_list<Sensor*> sensors = {});
+	~Device();
 
 	std::string GetSerial() const;
 

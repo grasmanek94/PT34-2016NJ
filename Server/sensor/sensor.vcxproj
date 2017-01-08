@@ -24,6 +24,7 @@
     <ClCompile Include="..\common\SharedMemoryQueue.cpp" />
     <ClCompile Include="..\common\SharedMemoryQueueMessage.cpp" />
     <ClCompile Include="DeviceSetup.cpp" />
+    <ClCompile Include="Processor.cpp" />
     <ClCompile Include="SerialConnectionSensor.cpp" />
     <ClCompile Include="ExecCommand.cpp" />
     <ClCompile Include="FirmwareInfo.cpp" />
@@ -38,6 +39,7 @@
     <ClInclude Include="..\common\SharedMemoryQueue.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueueMessage.hpp" />
     <ClInclude Include="DeviceSetup.hpp" />
+    <ClInclude Include="Processor.hpp" />
     <ClInclude Include="SerialConnectionSensor.hpp" />
     <ClInclude Include="ExecCommand.hpp" />
     <ClInclude Include="FirmwareInfo.hpp" />
