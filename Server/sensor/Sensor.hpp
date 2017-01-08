@@ -88,4 +88,6 @@ public:
 	virtual Position GetPosition() const;
 	virtual double GetMinValue() const;
 	virtual double GetMaxValue() const;
+
+	virtual bool SetValue(double value, size_t i = 0) = 0;
 };
