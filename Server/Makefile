@@ -1,3 +1,5 @@
+#change this to "arm-linux-gnueabi-g++" if crosscompiling
+#and add the flags for armv6: -march=armv6zk
 CFLAGS=-Wall -Werror -O3 -pedantic -Icommunicator -Isensor -Icommon -c -std=c++11
 LDDFLAGS=-lrt -lpthread -pthread -lboost_system -lboost_filesystem
 
@@ -6,8 +8,6 @@ COMMUNICATOR_OBJECTS=$(COMMUNICATOR_SOURCES:.cpp=.o)
 
 SENSOR_SOURCES=$(wildcard common/*.cpp sensor/*.cpp)
 SENSOR_OBJECTS=$(SENSOR_SOURCES:.cpp=.o)
-
-CC=g++
 
 .phony: all clean
 
