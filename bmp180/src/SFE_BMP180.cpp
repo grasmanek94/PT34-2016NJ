@@ -28,6 +28,43 @@ SFE_BMP180::SFE_BMP180()
 {
 }
 
+SFE_BMP180(&IMesurementSink MesurementSink, int targetInterval, char* keyword){
+	
+	IMesurementSink s = MesurementSink;
+	int interval = targetInterval;
+	int lastmillis = 0;
+	string placement = "Outside";
+	string position = "Topside";
+	
+}
+
+void run(){
+	if(millis() - lastmillis == targetInterval){
+		
+		
+		
+		lastmillis = millis();
+	}
+	
+	
+}
+
+void SetTargetInterval(int targetInterval){
+	interval = targetInterval;
+}
+
+int getTargetInterval(){
+	return interval;	
+}
+
+String getPlacement(){
+	return placement;
+}
+
+String getPosition(){
+	return position;	
+}
+		
 
 char SFE_BMP180::begin()
 // Initialize library for subsequent pressure measurements

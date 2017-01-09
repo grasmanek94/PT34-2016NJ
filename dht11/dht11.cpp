@@ -63,3 +63,11 @@ int dht11::read(int pin)
 	if (bits[4] != sum) return DHTLIB_ERROR_CHECKSUM;
 	return DHTLIB_OK;
 }
+
+int getTemperature(){
+	return temperature;
+}
+
+int getHumidity(){
+	return humidity;
+}

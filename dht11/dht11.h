@@ -15,8 +15,12 @@
 
 class dht11
 {
-public:
+	public:
     int read(int pin);
+	int getTemperature();
+	int getHumidity();
+	
+	private:
 	int humidity;
 	int temperature;
 };
