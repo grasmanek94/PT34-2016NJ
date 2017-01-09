@@ -56,5 +56,8 @@
     <ClInclude Include="..\common\Timer.hpp">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\common\Debug.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

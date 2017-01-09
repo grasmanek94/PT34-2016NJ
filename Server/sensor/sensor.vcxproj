@@ -36,6 +36,7 @@
     <ClCompile Include="SensorData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\Debug.hpp" />
     <ClInclude Include="..\common\RawQueue.hpp" />
     <ClInclude Include="..\common\SharedMemoryHelper.hpp" />
     <ClInclude Include="..\common\SharedMemoryQueue.hpp" />

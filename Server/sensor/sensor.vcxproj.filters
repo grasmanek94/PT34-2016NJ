@@ -98,5 +98,8 @@
     <ClInclude Include="SerialReceiver.hpp">
       <Filter>sensor</Filter>
     </ClInclude>
+    <ClInclude Include="..\common\Debug.hpp">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
