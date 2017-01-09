@@ -117,7 +117,7 @@ void SerialReceiver::ReceiverThread()
 			}
 		}
 
-		if (serial_buffer_pos)
+		if (serial_buffer_pos > 0)
 		{
 			for (size_t i = 0; i < (size_t)serial_buffer_pos; ++i)
 			{
