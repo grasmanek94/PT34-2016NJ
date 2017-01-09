@@ -1,4 +1,4 @@
-#include <SmartBeeHive/Measurement.hpp>
+#include "Measurement.hpp"
 #include <stddef.h>
 
 Measurement::Measurement(int data, char* type, int id)

@@ -1,9 +1,8 @@
 #ifndef SERIAL_SENDER_HPP_
 #define SERIAL_SENDER_HPP_
 
-#include <cstddef>
-#include <SmartBeeHive/IMeasurementSink.hpp>
-#include <SmartBeeHive/Packet.hpp>
+#include "IMeasurementSink.hpp"
+#include "Packet.hpp"
 
 class SerialSender : IMeasurementSink {
 public:

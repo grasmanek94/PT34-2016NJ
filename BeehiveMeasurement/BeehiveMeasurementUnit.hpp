@@ -1,9 +1,8 @@
 #ifndef BEEHIVE_MEASUREMENT_UNIT_HPP_
 #define BEEHIVE_MEASUREMENT_UNIT_HPP_
 
-#include <cstddef>
-#include <SmartBeeHive/ISensor.hpp>
-
+#include "ISensor.hpp"
+#include <Arduino.h>
 
 class BeehiveMeasurementUnit {
 public:

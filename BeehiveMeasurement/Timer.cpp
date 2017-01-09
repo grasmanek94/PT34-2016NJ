@@ -1,5 +1,5 @@
-#include <SmartBeeHive/Timer.hpp>
-//#include <Arduino.h>
+#include "Timer.hpp"
+#include <Arduino.h>
 
 
 Timer::Timer(unsigned long interval, bool autoReset)

@@ -1,7 +1,7 @@
 #ifndef ISENSOR_HPP_
 #define ISENSOR_HPP_
 
-#include <SmartBeeHive/IMeasurementSink.hpp>
+#include "IMeasurementSink.hpp"
 
 class ISensor {
 public:

@@ -1,4 +1,4 @@
-#include <SmartBeeHive/Packet.hpp>
+#include "Packet.hpp"
 
 
 Packet::Packet(Measurement &measurement) : _measurement(measurement)
