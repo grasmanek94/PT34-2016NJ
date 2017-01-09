@@ -36,27 +36,27 @@ void LightSensor::setTargetInterval(int targetInterval)
   interval = targetInterval;
 }
 
-int LightSensorgetTargetInterval()
+int LightSensor::LightSensorgetTargetInterval()
 {
   return interval;
 }
 
-void setType(char* newType)
+void LightSensor::setType(char* newType)
 {
   type = newType;
 }
 
-char* getType()
+char* LightSensor::getType()
 {
   return type;
 }
 
-void setIndex(int newIndex)
+void LightSensor::setIndex(int newIndex)
 {
   index = newIndex;
 }
 
-int getIndex()
+int LightSensor::getIndex()
 {
   return index;
 }
