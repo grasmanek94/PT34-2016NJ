@@ -4,6 +4,7 @@
 #include "HX711.h"
 #include "ISensor.hpp"
 #include "IMeasurementSink.hpp"
+#include "Timer.hpp"
 
 class WeightSensor : public ISensor
 {
@@ -16,6 +17,7 @@ class WeightSensor : public ISensor
     int pin;
     int pin2;
 		float calibration_factor = -43800; // This is the correct value for 1 load cell attached with output in kg, use calibration to alter this value
+    Timer timer;
 
 	public:
 		//Create Weightsensor object; &s = reference to IMeasurementSink, t = target interval, T = sensor type, i = sensorindex, p = DOUT and p2 = CLK
@@ -25,7 +27,7 @@ class WeightSensor : public ISensor
     ~WeightSensor();
 		
 		//Start calibration process, use serial monitor on baudrate 9600 and follow instructions printed
-		void Reset();
+		void reset();
 
 		//Return first pin as int
 		int getPin();
