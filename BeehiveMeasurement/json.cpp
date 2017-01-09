@@ -4,11 +4,11 @@ String Json::measurementToJson(const Measurement &measurement)
 {
     String result;
 
-    result += "{type: \"";
+    result += "{\"type\": \"";
     result += measurement.getType();
-    result += "\", index:";
+    result += "\", \"index\":";
     result += measurement.getId();
-    result += ", value:";
+    result += ", \"value\":";
     result += measurement.getData();
     result += "}";
 
