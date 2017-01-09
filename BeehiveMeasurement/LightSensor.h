@@ -2,10 +2,10 @@
 #define LightSensor_h
 
 #include <Arduino.h>
-#include "../../Wire.h"
-#include"../../IMeasurementSink.hpp"
-#include "../../Measurement.hpp"
-#include "../../ISensor.hpp"
+#include <Wire.h>
+#include"IMeasurementSink.hpp"
+#include "Measurement.hpp"
+#include "ISensor.hpp"
 
 class LightSensor : public ISensor
 {
