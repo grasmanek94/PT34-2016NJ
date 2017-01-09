@@ -1,5 +1,6 @@
 #include <stdexcept>
 
+#include <Debug.hpp>
 #include "Communicator.hpp"
 #include "RawQueue.hpp"
 
@@ -11,11 +12,13 @@ volatile sig_atomic_t done = 0;
 
 void term(int signum)
 {
+	DEBUG_MSG("TERMINATION REQUESTED");
 	done = 1;
 }
 
 void Communicator::on_open(websocketpp::connection_hdl hdl)
 {
+	DEBUG_MSG("Communicator::on_open");
 	connections.insert(hdl);
 
 	// because for now only 1 outgoing connection at once
@@ -24,11 +27,19 @@ void Communicator::on_open(websocketpp::connection_hdl hdl)
 
 	// make the other process send the DeviceInfo after connecting, nice uh?
 	SharedMemoryQueueMessage message(std::string("{\"GetDeviceSetup\":null}"));
-	in_queue.Push(&message);
+	if (in_queue.Push(&message))
+	{
+		DEBUG_MSG("Pushed SUCCESS: " << message.Get());
+	}
+	else
+	{
+		DEBUG_MSG("Pushed FAILURE: " << message.Get());
+	}
 }
 
 void Communicator::on_close(websocketpp::connection_hdl hdl)
 {
+	DEBUG_MSG("Communicator::on_close");
 	connections.erase(hdl);
 	Reconnect();
 }
@@ -36,6 +47,7 @@ void Communicator::on_close(websocketpp::connection_hdl hdl)
 void Communicator::on_message(websocketpp::connection_hdl hdl, message_ptr msg)
 {
 	std::string payload(msg->get_payload());
+	DEBUG_MSG("Communicator::on_message: " << payload);
 	if (payload.size() >= max_items_for_RawQueue)
 	{
 		websocket_client.send(hdl, "\
@@ -66,11 +78,14 @@ void Communicator::on_message(websocketpp::connection_hdl hdl, message_ptr msg)
 		}", websocketpp::frame::opcode::text);
 		return;
 	}
+
+	DEBUG_MSG("Communicator::pushed_message: " << message.Get());
 }
 
 Communicator::Communicator()
  : in_queue("in_webscktmsg"), out_queue("out_webscktmsg")
 {
+	DEBUG_MSG("Communicator::Communicator");
 	// Set logging settings
 #ifdef _DEBUG
 	websocket_client.set_access_channels(websocketpp::log::alevel::all);
@@ -88,15 +103,17 @@ Communicator::Communicator()
 
 	websocket_client.set_open_handler(bind(&Communicator::on_open, this, ::_1));
 	websocket_client.set_close_handler(bind(&Communicator::on_close, this, ::_1));
+
 }
 
 Communicator::~Communicator()
 {
-
+	DEBUG_MSG("Communicator::~Communicator");
 }
 
 void Communicator::Reconnect()
 {
+	DEBUG_MSG("Communicator::Reconnect");
 	websocketpp::lib::error_code ec;
 
 	client::connection_ptr con = websocket_client.get_connection(host.GetHost(), ec);
@@ -110,9 +127,12 @@ void Communicator::Reconnect()
 
 void Communicator::Run()
 {
+	DEBUG_MSG("Communicator::Run");
+
 	static bool terminator_initialized = false;
 	if (!terminator_initialized)
 	{
+		DEBUG_MSG("Communicator::terminator_initialized");
 		terminator_initialized = true;
 		struct sigaction action;
 		memset(&action, 0, sizeof(struct sigaction));
@@ -124,6 +144,7 @@ void Communicator::Run()
 
 	SharedMemoryQueueMessage message;
 
+	DEBUG_MSG("Communicator::loop");
 	while (!done)
 	{
 		websocket_client.poll();
@@ -132,6 +153,7 @@ void Communicator::Run()
 		if (out_queue.TryPop(&message))
 		{
 			std::string s_message(message.Get());
+			DEBUG_MSG("Communicator::popped_message: " << s_message);
 			for (auto it : connections) 
 			{
 				websocket_client.send(it, s_message, websocketpp::frame::opcode::text);

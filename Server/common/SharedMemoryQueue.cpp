@@ -9,6 +9,7 @@
 #include <sys/file.h>
 #include <fcntl.h>
 
+#include "Debug.hpp"
 #include "SharedMemoryHelper.hpp"
 #include "SharedMemoryQueueMessage.hpp"
 #include "RawQueue.hpp"
@@ -16,16 +17,19 @@
 
 bool SharedMemoryQueue::Wait()
 {
+	DEBUG_MSG("SharedMemoryQueue::Wait");
 	return sem_wait(queue_operation_semaphore) == 0;
 }
 
 bool SharedMemoryQueue::Post()
 {
+	DEBUG_MSG("SharedMemoryQueue::Post");
 	return sem_post(queue_operation_semaphore) == 0;
 }
 
 bool SharedMemoryQueue::TryWait()
 {
+	DEBUG_MSG("SharedMemoryQueue::TryWait");
 	return sem_trywait(queue_operation_semaphore) == 0;
 }
 
@@ -37,6 +41,7 @@ SharedMemoryQueue::SharedMemoryQueue(const std::string& queue_name)
 		queue_name(queue_name),
 		deletion_fd_protection(-1)
 {
+	DEBUG_MSG("SharedMemoryQueue::SharedMemoryQueue:" << queue_name);
 	deletion_fd_protection = open(("/tmp/deletion_fd_protection.ipc_lockcheck." + queue_name).c_str(), O_CREAT | O_RDWR, 0666);
 	if (deletion_fd_protection == -1)
 	{
@@ -92,11 +97,14 @@ bool SharedMemoryQueue::Push(SharedMemoryQueueMessage* item)
 {
 	if (queue_shared_memory->Count() == queue_shared_memory->MaxCount())
 	{
+		DEBUG_MSG("SharedMemoryQueue::Push:Full");
 		return false;
 	}
+	DEBUG_MSG("SharedMemoryQueue::Push:Wait");
 	Wait();
 	bool ret_val = queue_shared_memory->Push(item);
 	Post();
+	DEBUG_MSG("SharedMemoryQueue::Push:Post:" << ret_val);
 	return ret_val;
 }
 
@@ -104,11 +112,14 @@ bool SharedMemoryQueue::Pop(SharedMemoryQueueMessage* item)
 {
 	if (queue_shared_memory->Count() == 0)
 	{
+		DEBUG_MSG("SharedMemoryQueue::Pop:empty");
 		return false;
 	}
+	DEBUG_MSG("SharedMemoryQueue::Pop:Wait");
 	Wait();
 	bool ret_val = queue_shared_memory->Pop(item);
 	Post();
+	DEBUG_MSG("SharedMemoryQueue::Pop:Post:" << ret_val);
 	return ret_val;
 }
 
@@ -116,25 +127,25 @@ bool SharedMemoryQueue::TryPush(SharedMemoryQueueMessage* item)
 {
 	if (queue_shared_memory->Count() == queue_shared_memory->MaxCount() || !TryWait())
 	{
+		DEBUG_MSG("SharedMemoryQueue::TryPush:Full||!TryWait:" << (queue_shared_memory->Count() == queue_shared_memory->MaxCount()));
 		return false;
 	}
 	bool ret_val = queue_shared_memory->Push(item);
 	Post();
+	DEBUG_MSG("SharedMemoryQueue::TryPush:Post:" << ret_val);
 	return ret_val;
 }
 
 bool SharedMemoryQueue::TryPop(SharedMemoryQueueMessage* item)
 {
-	if (queue_shared_memory->Count() == 0 || sem_trywait(queue_operation_semaphore) != 0)
+	if (queue_shared_memory->Count() == 0 || !TryWait())
 	{
-		return false;
-	}
-	if (!TryWait())
-	{
+		DEBUG_MSG("SharedMemoryQueue::TryPop:Full||!TryWait:" << (queue_shared_memory->Count() == 0));
 		return false;
 	}
 	bool ret_val = queue_shared_memory->Pop(item);
 	Post();
+	DEBUG_MSG("SharedMemoryQueue::TryPop:Post:" << ret_val);
 	return ret_val;
 }
 
@@ -145,6 +156,7 @@ size_t SharedMemoryQueue::Count() const
 
 void SharedMemoryQueue::Clear()
 {
+	DEBUG_MSG("SharedMemoryQueue::Clear");
 	if (queue_shared_memory->Count() == 0)
 	{
 		return;
@@ -156,6 +168,7 @@ void SharedMemoryQueue::Clear()
 
 SharedMemoryQueue::~SharedMemoryQueue()
 {
+	DEBUG_MSG("SharedMemoryQueue::~SharedMemoryQueue");
 	sem_close(queue_operation_semaphore);
 	sem_close(memory_prepare_semaphore);
 	close(shm_fd);

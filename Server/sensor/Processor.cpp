@@ -1,16 +1,19 @@
 #include <csignal>
 #include <thread>
 #include <json/json.hpp>
+#include <Timer.hpp>
+#include <Debug.hpp>
 #include "Processor.hpp"
 #include "SimpleSensor.hpp"
 #include "SensorData.hpp"
-#include <Timer.hpp>
+
 
 using namespace nlohmann;
 volatile sig_atomic_t done = 0;
 
 void term(int signum)
 {
+	DEBUG_MSG("TERMINATION REQUESTED");
 	done = 1;
 }
 
@@ -29,9 +32,11 @@ Processor::Processor()
 		}),
 	receiver(&device)
 {
+	DEBUG_MSG("Processor::Processor");
 	static bool terminator_initialized = false;
 	if (!terminator_initialized)
 	{
+		DEBUG_MSG("terminator_initialized");
 		terminator_initialized = true;
 		struct sigaction action;
 		memset(&action, 0, sizeof(struct sigaction));
@@ -42,21 +47,24 @@ Processor::Processor()
 
 Processor::~Processor()
 {
-
+	DEBUG_MSG("Processor::~Processor");
 }
 
 void Processor::Run()
 {
+	DEBUG_MSG("Processor::Run");
 	SharedMemoryQueueMessage message;
 	Timer data_send_timer;
 
 	data_send_timer.Start();
 
+	DEBUG_MSG("Processor::loop");
 	while (!done)
 	{
 		// recv from belgie
 		if (in_queue.TryPop(&message))
 		{
+			DEBUG_MSG("Processor::popped_message: " << message.Get());
 			json j = json::parse(message.Get().c_str());
 
 			auto device_setup = j.find("GetDeviceSetup");
@@ -64,7 +72,14 @@ void Processor::Run()
 			{
 				// send to belgie
 				message.Set(device.GetResponseJson());
-				out_queue.Push(&message);
+				if (out_queue.Push(&message))
+				{
+					DEBUG_MSG("Processor::GetDeviceSetup:pushed_message: SUCCESS: " << message.Get());
+				}
+				else
+				{
+					DEBUG_MSG("Processor::GetDeviceSetup:pushed_message: FAILED: " << message.Get());
+				}
 			}
 		}
 
@@ -80,7 +95,14 @@ void Processor::Run()
 
 			// send to belgie
 			message.Set(data.GetResponseJson());
-			out_queue.Push(&message);
+			if (out_queue.Push(&message))
+			{
+				DEBUG_MSG("Processor::GetSensorData:pushed_message: SUCCESS: " << message.Get());
+			}
+			else
+			{
+				DEBUG_MSG("Processor::GetSensorData:pushed_message: FAILED: " << message.Get());
+			}
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));

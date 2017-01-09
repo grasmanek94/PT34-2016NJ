@@ -4,6 +4,7 @@
 #include <vector>
 #include <limits>
 #include <json/json.hpp>
+#include <Debug.hpp>
 #include "SensorData.hpp"
 
 using json = nlohmann::json;
@@ -11,6 +12,7 @@ using json = nlohmann::json;
 SensorData::SensorData(Device* setup)
 	: setup(setup)
 {
+	DEBUG_MSG("SensorData::SensorData");
 	if (setup == NULL)
 	{
 		throw std::runtime_error("setup == NULL");
@@ -19,6 +21,7 @@ SensorData::SensorData(Device* setup)
 
 std::string SensorData::GetRequestJson() const
 {
+	DEBUG_MSG("SensorData::GetRequestJson");
 	const static json j
 	{
 		{ "GetSensorData", {} }
@@ -30,6 +33,7 @@ std::string SensorData::GetRequestJson() const
 
 std::string SensorData::GetResponseJson() const
 {
+	DEBUG_MSG("SensorData::GetResponseJson");
 	// TODO: add errors here or to parse request
 	std::map <std::string, json> sensor_data;
 
@@ -83,6 +87,7 @@ std::string SensorData::GetResponseJson() const
 //if empty json in ParseRequest then everything is returned
 void SensorData::ParseRequestJson(const std::string& _json)
 {
+	DEBUG_MSG("SensorData::ParseRequestJson: " << _json);
 	const json j = json::parse(_json.c_str());
 	request_sensors.clear();
 
@@ -102,6 +107,7 @@ void SensorData::ParseRequestJson(const std::string& _json)
 
 	if (request_sensors.empty())
 	{
+		DEBUG_MSG("SensorData::ParseRequestJson:AllSensors");
 		request_sensors[SensorTypeTemperature] = std::vector<size_t>();
 		request_sensors[SensorTypeSound] = std::vector<size_t>();
 		request_sensors[SensorTypeWeight] = std::vector<size_t>();
@@ -113,5 +119,6 @@ void SensorData::ParseRequestJson(const std::string& _json)
 
 void SensorData::ParseResponseJson(const std::string& json)
 {
+	DEBUG_MSG("SensorData::ParseResponseJson: " << json);
 	// TODO: finish this function to be able to construct SensorData object completely from a JSON formatted string
 }
