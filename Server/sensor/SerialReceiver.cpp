@@ -139,7 +139,7 @@ void SerialReceiver::ReceiverThread()
 					{
 						DEBUG_MSG("SerialReceiver::ReceiverThread:Push: FAILURE: " << temp_str);
 					}
-					break;
+					i = 0;
 				}
 			}
 		}
@@ -152,17 +152,24 @@ void SerialReceiver::Update()
 	static SharedMemoryQueueMessage message;
 	if (msg_queue.TryPop(&message))
 	{
-		json j = json::parse(message.Get().c_str());
-
-		std::string type_str = j.at("type").get<std::string>();
-		SensorType type = SensorTypeStrings.right.at(type_str);
-		size_t index = j.at("index").get<size_t>();
-		double value = j.at("value").get<double>();
-		Sensor* sensor = setup->GetSensor(type, index);
-		if (sensor != NULL)
+		try
 		{
-			DEBUG_MSG("SerialReceiver::Update:SetValue: (" << type << ", " << index << ", " << value << ") " << message.Get());
-			sensor->SetValue(value);
+			json j = json::parse(message.Get().c_str());
+
+			std::string type_str = j.at("type").get<std::string>();
+			SensorType type = SensorTypeStrings.right.at(type_str);
+			size_t index = j.at("index").get<size_t>();
+			double value = j.at("value").get<double>();
+			Sensor* sensor = setup->GetSensor(type, index);
+			if (sensor != NULL)
+			{
+				DEBUG_MSG("SerialReceiver::Update:SetValue: (" << type << ", " << index << ", " << value << ") " << message.Get());
+				sensor->SetValue(value);
+			}
+		}
+		catch (const std::exception& e)
+		{
+			DEBUG_MSG("SerialReceiver::Update:Exception: " << e.what());
 		}
 	}
 }

@@ -1,0 +1,5 @@
+client:
+socat PTY,link=/dev/ttyUSB1 TCP:localhost:2022
+server:
+nc -l 2022
+{"type":"temperature","index":0,"value":21.0}{"type":"temperature","index":1,"value":11.0}{"type":"sound","index":0,"value":33.333}{"type":"weight","index":0,"value":500.0}{"type":"humidity","index":0,"value":95.0}{"type":"pressure","index":0,"value":1001055}{"type":"light-intensity","index":0,"value":80}{"type":"temperature","index":0,"value":21.0}{"type":"temperature","index":1,"value":11.0}{"type":"sound","index":0,"value":33.333}{"type":"weight","index":0,"value":500.0}{"type":"humidity","index":0,"value":95.0}{"type":"pressure","index":0,"value":1001055}{"type":"light-intensity","index":0,"value":80}
