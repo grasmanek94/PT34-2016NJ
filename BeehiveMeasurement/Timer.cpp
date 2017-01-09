@@ -36,19 +36,22 @@ bool Timer::isRunning()
 
 bool Timer::isElapsed()
 {
-    if(millis() >= _deadline)
+    if(_running)
     {
-        if(_autoReset)
+        if(millis() >= _deadline)
         {
-            start();
+            if(_autoReset)
+            {
+                start();
+            }
+            else
+            {
+                stop();
+            }
+            return true;
         }
-        else
-        {
-            stop();
-        }
-        return true;
+        return false;
     }
-    return false;
 }
 
 void Timer::setInterval(unsigned long interval)
