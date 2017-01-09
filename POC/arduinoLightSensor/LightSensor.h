@@ -3,27 +3,31 @@
 
 #include<arduino.h>
 #include"wire.h"
+#include"iMeasurementSink.h"
+#include"Measurement"
 
 class LightSensor:ISensor
 {
 public:
-  LightSensor(&IMesurementSink, int tagetInterval);
+  LightSensor(IMeasurementSink &IMesurementSink, int tagetInterval, char* type, int index);
   void run();
   void setTargetInterval(int targetInterval);
   int getTargetInterval();
-  String getPlacement();
-  String getPosition();
+  void setType(char* newType);
+  char* getType();
+  void setIndex(int newIndex);
+  int getIndex();
 
 private:
   void requestData();
   uint16_t readData();
 
-  IMesurementSink sink;
+  IMesurementSink* sink;
   int interval;
-  string placement;
-  string position;
-  int address;
+  char* type;
+  int index;
 
+  int address;
   int readDelay;
   bool reading;
   unsigned long time;

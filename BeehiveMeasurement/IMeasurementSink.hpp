@@ -1,7 +1,7 @@
 #ifndef IMEASUREMENTSINK_HPP_
 #define IMEASUREMENTSINK_HPP_
 
-#include <SmartBeeHive/Measurement.hpp>
+#include "Measurement.hpp"
 
 class IMeasurementSink {
 public:

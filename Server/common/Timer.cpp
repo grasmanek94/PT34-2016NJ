@@ -1,7 +1,9 @@
+#include "Debug.hpp"
 #include "Timer.hpp"
 
 Timer::Timer()
 {
+	DEBUG_MSG("Timer::Timer");
 	start = std::chrono::system_clock::now();
 }
 
@@ -16,10 +18,12 @@ double Timer::ElapsedMilliseconds()
 
 void Timer::Start()
 {
+	DEBUG_MSG("Timer::Start");
 	Restart();
 }
 
 void Timer::Restart()
 {
+	DEBUG_MSG("Timer::Restart");
 	start = std::chrono::system_clock::now();
 }

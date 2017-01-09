@@ -2,18 +2,21 @@
 #include <boost/filesystem.hpp>
 using namespace boost::filesystem;
 
+#include <Debug.hpp>
 #include "Device.hpp"
 
 using json = nlohmann::json;
 
 Device::Device()
+	: serial(fwinfo.GetSerial())
 {
-
+	DEBUG_MSG("Device::Device():" << serial);
 }
 
 Device::Device(size_t capabilities, std::initializer_list<Sensor*> sensors_list)
 	: serial(fwinfo.GetSerial()), capabilities(capabilities)
 {
+	DEBUG_MSG("Device::Device(...):" << serial);
 	for (auto &sensor : sensors_list)
 	{
 		sensors[sensor->GetSensorType()].push_back(sensor);
@@ -22,11 +25,13 @@ Device::Device(size_t capabilities, std::initializer_list<Sensor*> sensors_list)
 
 Device::~Device()
 {
+	DEBUG_MSG("Device::~Device");
 	CleanSensors();
 }
 
 std::string Device::GetRequestJson() const
 {
+	DEBUG_MSG("Device::GetRequestJson");
 	const static json j
 	{
 		{ "GetDeviceSetup", {} }
@@ -38,6 +43,7 @@ std::string Device::GetRequestJson() const
 
 void Device::ParseRequestJson(const std::string& _json)
 {
+	DEBUG_MSG("Device::ParseRequestJson: " << _json);
 	const json j = json::parse(_json.c_str());
 	//cleanup
 
@@ -50,6 +56,7 @@ void Device::ParseRequestJson(const std::string& _json)
 
 std::string Device::GetResponseJson() const
 {
+	DEBUG_MSG("Device::GetResponseJson");
 	space_info si = space(".");
 
 	json j
@@ -129,6 +136,7 @@ std::string Device::GetResponseJson() const
 
 void Device::CleanSensors()
 {
+	DEBUG_MSG("Device::CleanSensors");
 	for (auto& sensor_type : sensors)
 	{
 		for (size_t i = 0, j = sensor_type.second.size(); i < j; ++i)
@@ -166,6 +174,7 @@ size_t Device::GetSensorCount(SensorType type) const
 
 void Device::ParseResponseJson(const std::string& _json)
 {
+	DEBUG_MSG("Device::ParseResponseJson: " << _json);
 	const json j = json::parse(_json.c_str());
 	auto device_setup = j.find("GetDeviceSetup");
 	if (device_setup != j.end())

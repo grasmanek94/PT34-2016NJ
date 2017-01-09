@@ -1,10 +1,9 @@
-
-#include <SmartBeeHive/BeehiveMeasurementUnit.hpp>
+#include "BeehiveMeasurementUnit.hpp"
 
 BeehiveMeasurementUnit::BeehiveMeasurementUnit(size_t nrSensors, ISensor** sensors)
     :_nrSensors(nrSensors), _sensors(sensors), _running(false)
 {
-
+  init();
 }
 
 BeehiveMeasurementUnit::~BeehiveMeasurementUnit()
