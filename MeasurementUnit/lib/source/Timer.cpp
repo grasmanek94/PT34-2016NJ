@@ -1,33 +1,72 @@
-#include <SmartBeeHive/SerialSender.hpp>
+#include <SmartBeeHive/Timer.hpp>
 //#include <Arduino.h>
 
-SerialSender::SerialSender(unsigned int baudrate) : _baudrate(baudrate)
+
+Timer::Timer(unsigned long interval, bool autoReset)
+    : _interval(interval), _autoReset(autoReset), _running(false)
 {
 
 }
 
-SerialSender::~SerialSender()
+Timer::~Timer()
 {
 
 }
 
-unsigned int SerialSender::getBaudrate()
+void Timer::start()
 {
-    return _baudrate;
+    reset();
+    _running = true;
 }
 
-void SerialSender::setBaudrate(unsigned int baudrate)
+void Timer::stop()
 {
-    _baudrate = baudrate;
+    _running = false;
 }
 
-void SerialSender::sendMeasurement(Measurement measurement)
+void Timer::reset()
 {
-    Packet packet(measurement);
-    sendPacket(packet);
+    _deadline = millis() + _interval;
 }
 
-void SerialSender::sendPacket(Packet packet)
+bool Timer::isRunning()
 {
-    //Serial.println(packet.toJsonFormat());
+    return _running;
+}
+
+bool Timer::isElapsed()
+{
+    if(millis() >= _deadline)
+    {
+        if(_autoReset)
+        {
+            start();
+        }
+        else
+        {
+            stop();
+        }
+        return true;
+    }
+    return false;
+}
+
+void Timer::setInterval(unsigned long interval)
+{
+    _interval = interval;
+}
+
+unsigned long Timer::getInterval()
+{
+    return _interval;
+}
+
+void Timer::setAutoReset(bool value)
+{
+    _autoReset = value;
+}
+
+bool Timer::getAutoReset()
+{
+    return _autoReset;
 }

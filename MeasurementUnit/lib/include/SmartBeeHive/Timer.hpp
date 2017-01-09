@@ -1,22 +1,29 @@
 #ifndef TIMER_HPP_
 #define TIMER_HPP_
 
-#include <Arduino.h>
-
 class Timer {
 public:
-    Timer();
+    Timer(unsigned long interval, bool autoReset);
     virtual ~Timer();
 
-    unsigned int getBaudrate();
-    void setBaudrate(unsigned int baudrate);
+    void start();
+    void stop();
+    void reset();
 
-    virtual void sendMeasurement(Measurement measurement) override;
+    bool isRunning();
+    bool isElapsed();
+
+    void setInterval(unsigned long interval);
+    unsigned long getInterval();
+
+    void setAutoReset(bool value);
+    bool getAutoReset();
 
 private:
-    unsigned int _baudrate;
-
-    void sendPacket(Packet packet);
+    unsigned long _interval;
+    unsigned long _deadline;
+    bool _autoReset;
+    bool _running;
 };
 
 #endif // TIMER_HPP_
