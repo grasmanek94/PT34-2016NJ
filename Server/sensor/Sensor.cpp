@@ -1,8 +1,9 @@
+#include <Debug.hpp>
 #include "Sensor.hpp"
 
 Sensor::~Sensor()
 {
-
+	DEBUG_MSG("Sensor::~Sensor");
 }
 
 Sensor::Sensor(
@@ -14,7 +15,15 @@ Sensor::Sensor(
 	placement(placement), num_values(num_values), 
 	position(position), min_value(min_value), max_value(max_value)
 {
-
+	DEBUG_MSG("Sensor::Sensor(" 
+		<< SensorTypeStrings.left.at(type) << ", " 
+		<< SensorUnitStrings.left.at(unit) << ", " 
+		<< SensorPlacementStrings.left.at(placement) << ", " 
+		<< "num_values: " << num_values << ", "
+		<< "min_value: " << min_value << ", "
+		<< "max_value: " << max_value << ", "
+		<< "position: {" << position.x << ", " << position.y << ", " << position.z << "}"
+		<< ")");
 }
 
 SensorType Sensor::GetSensorType() const

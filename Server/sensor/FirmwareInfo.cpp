@@ -1,14 +1,15 @@
+#include <Debug.hpp>
 #include "FirmwareInfo.hpp"
 #include "ExecCommand.hpp"
 
 FirmwareInfo::FirmwareInfo()
 {
-
+	DEBUG_MSG("FirmwareInfo::FirmwareInfo");
 }
 
 FirmwareInfo::~FirmwareInfo()
 {
-
+	DEBUG_MSG("FirmwareInfo::~FirmwareInfo");
 }
 
 std::string FirmwareInfo::GetOSInfo() const
