@@ -1,15 +1,16 @@
 #include "LightSensor.h"
+#include "Measurement"
 
-LightSensor::LightSensor(&IMesurementSink MesurementSink , int tagetInterval)
+LightSensor::LightSensor(IMeasurementSink &IMesurementSink, int tagetInterval, char* type, int id)
 :sink(MesurementSink)
+,intercal(targetInterval)
+,type(type)
+,id(id)
 {
   Wire.begin();
-  placement = "buiten";
-  position = "bovenop";
   address = 0x23;
   readDelay = 150;
   reading = false;
-  setTargetInterval(targetInterval);
 }
 
 void LightSensor::run()
@@ -18,11 +19,13 @@ void LightSensor::run()
   {
     requestData();
     time = millis();
+    return;
   }
   elseif(reading && millis()>time+readDelay)
   {
     uint16_t LUX = readData();
-
+    Measurement LuxMeas = Measurement(*this, type, id, LUX)
+    sink->send(LuxMeas)
   }
 }
 
@@ -39,14 +42,24 @@ int LightSensorgetTargetInterval()
   return interval;
 }
 
-String LightSensorgetPlacement()
+void setType(char* newType)
 {
-  return placement;
+  type = newType;
 }
 
-String LightSensorgetPosition()
+char* getType()
 {
-  return position;
+  return type;
+}
+
+void setId(int newId)
+{
+  id = newId;
+}
+
+int getId()
+{
+  return id;
 }
 
 void LightSensor::requestData()
@@ -73,11 +86,11 @@ uint16_t LightSensor::readData()
   if (i == 2)
   {
     val /= 1.2;
+    reading = false;
     return val;
   }
   else
   {
     return -1;
   }
-  reading = false;
 }
