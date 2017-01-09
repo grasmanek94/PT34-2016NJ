@@ -1,4 +1,5 @@
 #change this to "arm-linux-gnueabi-g++" if crosscompiling
+CC=g++
 #and add the flags for armv6: -march=armv6zk
 CFLAGS=-Wall -Werror -O3 -pedantic -Icommunicator -Isensor -Icommon -c -std=c++11
 LDDFLAGS=-lrt -lpthread -pthread -lboost_system -lboost_filesystem
