@@ -1,6 +1,6 @@
 #include "SerialSender.hpp"
 #include "sensors/DummySensor.hpp"
-#include "sensors/Light/LightSensor.h"
+#include "LightSensor.h"
 #include "WeightSensor.hpp"
 
 SerialSender serialSender(0);

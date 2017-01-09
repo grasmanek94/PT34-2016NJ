@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <HX711.h>
+#include "HX711.h"
 
 HX711::HX711(byte dout, byte pd_sck, byte gain) {
 	begin(dout, pd_sck, gain);

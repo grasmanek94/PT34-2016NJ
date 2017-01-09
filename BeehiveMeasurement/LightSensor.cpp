@@ -1,4 +1,4 @@
-#include "sensors/Light/LightSensor.h"
+#include "LightSensor.h"
 #include "Measurement.hpp"
 #include "IMeasurementSink.hpp"
 
