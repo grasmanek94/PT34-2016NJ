@@ -14,6 +14,7 @@ LightSensor::LightSensor(IMeasurementSink &iMeasurementSink, int targetInterval,
   address = 0x23;
   readDelay = 150;
   reading = false;
+  time=millis()-interval;
 }
 
 void LightSensor::run()
