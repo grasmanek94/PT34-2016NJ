@@ -10,7 +10,6 @@ public:
 
     virtual void run() = 0;
     virtual char* getType() = 0;
-    virtual void setType(char* keyword) = 0;
 
     virtual int getIndex() = 0;
     virtual void setIndex(int index) = 0;

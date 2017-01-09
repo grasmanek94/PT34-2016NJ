@@ -4,7 +4,7 @@
 #include "IMeasurementSink.hpp"
 #include "Packet.hpp"
 
-class SerialSender : IMeasurementSink {
+class SerialSender : public IMeasurementSink {
 public:
     SerialSender(unsigned int baudrate);
     virtual ~SerialSender();
@@ -16,8 +16,6 @@ public:
 
 private:
     unsigned int _baudrate;
-
-    void sendPacket(Packet packet);
 };
 
 #endif // SERIAL_SENDER_HPP_

@@ -1,4 +1,5 @@
 #include "SerialSender.hpp"
+#include "json.hpp"
 #include <Arduino.h>
 
 SerialSender::SerialSender(unsigned int baudrate) : _baudrate(baudrate)
@@ -23,11 +24,6 @@ void SerialSender::setBaudrate(unsigned int baudrate)
 
 void SerialSender::sendMeasurement(Measurement measurement)
 {
-    Packet packet(measurement);
-    sendPacket(packet);
-}
-
-void SerialSender::sendPacket(Packet packet)
-{
-    //Serial.println(packet.toJsonFormat());
+    auto data = Json::measurementToJson(measurement);
+    Serial.println(data);
 }

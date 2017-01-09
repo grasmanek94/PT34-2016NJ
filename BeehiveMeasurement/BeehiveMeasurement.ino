@@ -1,11 +1,18 @@
 #include "BeehiveMeasurementUnit.hpp" 
 
-void setup() {
-  // put your setup code here, to run once:
-  
+#include "SerialSender.hpp"
+#include "sensors/DummySensor.hpp"
+
+
+SerialSender serialSender(0);
+DummySensor dummySensor(serialSender, 1000, "12", 132);
+
+void setup()
+{
+  Serial.begin(115200);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-
+void loop()
+{
+    dummySensor.run();
 }
