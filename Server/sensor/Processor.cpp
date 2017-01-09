@@ -29,9 +29,9 @@ Processor::Processor()
 			new SimpleSensor(SensorTypeHumidity, SensorUnitPercent, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 7.0, 10.0, -10.2 }),
 			new SimpleSensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementInside, 1, -100.0, 200.0, Position{ 8.0, 10.0, -10.1 }),
 			new SimpleSensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 9.0, 10.0, -10.0 })
-		}),
-	receiver(&device)
+		})
 {
+	receiver = new SerialReceiver(&device);
 	DEBUG_MSG("Processor::Processor");
 	static bool terminator_initialized = false;
 	if (!terminator_initialized)
@@ -48,6 +48,9 @@ Processor::Processor()
 Processor::~Processor()
 {
 	DEBUG_MSG("Processor::~Processor");
+
+	delete receiver;
+	receiver = NULL;
 }
 
 void Processor::Run()
@@ -84,7 +87,7 @@ void Processor::Run()
 		}
 
 		// update values from serial / arduino here
-		receiver.Update();
+		receiver->Update();
 
 		if (data_send_timer.ElapsedMilliseconds() > 10000)
 		{

@@ -9,7 +9,7 @@ private:
 	SharedMemoryQueue in_queue;
 	SharedMemoryQueue out_queue;
 	Device device;
-	SerialReceiver receiver;
+	SerialReceiver* receiver;
 public:
 	Processor();
 	~Processor();
