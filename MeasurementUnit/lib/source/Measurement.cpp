@@ -1,8 +1,8 @@
 #include <SmartBeeHive/Measurement.hpp>
 #include <stddef.h>
 
-Measurement::Measurement(int data, char *sensorKeyword)
-    :_data(data), _sensorKeyword(sensorKeyword)
+Measurement::Measurement(int data, char* type, int id)
+    :_data(data), _type(type), _id(id)
 {
 
 }
@@ -22,14 +22,17 @@ void Measurement::setData(int data)
     _data = data;
 }
 
-char *Measurement::getSensorKeyword() const
-{
-    return _sensorKeyword;
+char* Measurement::getType() const {
+    return _type;
 }
 
-void Measurement::setSensorKeyword(char *sensorKeyword)
-{
-    if(sensorKeyword != NULL){
-        _sensorKeyword = sensorKeyword;
-    }
+void Measurement::setType(char* type) {
+    _type = type;
+}
+
+int Measurement::getId() const {
+    return _id;
+}
+void Measurement::setId(int id) {
+    _id = id;
 }
