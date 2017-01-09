@@ -8,14 +8,14 @@
 class LightSensor:ISensor
 {
 public:
-  LightSensor(IMeasurementSink &IMesurementSink, int tagetInterval, char* type, int id);
+  LightSensor(IMeasurementSink &IMesurementSink, int tagetInterval, char* type, int index);
   void run();
   void setTargetInterval(int targetInterval);
   int getTargetInterval();
   void setType(char* newType);
   char* getType();
-  void setId(int newId);
-  int getId();
+  void setIndex(int newIndex);
+  int getIndex();
 
 private:
   void requestData();
@@ -24,7 +24,7 @@ private:
   IMesurementSink* sink;
   int interval;
   char* type;
-  int id;
+  int index;
 
   int address;
   int readDelay;
