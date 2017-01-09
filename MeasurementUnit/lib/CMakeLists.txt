@@ -12,6 +12,7 @@ set(SOURCE
     "${SOURCE_DIR}/Measurement.cpp"
     "${SOURCE_DIR}/SerialSender.cpp"
     "${SOURCE_DIR}/Packet.cpp"
+    "${SOURCE_DIR}/Timer.cpp"
    )
 
 
@@ -24,6 +25,7 @@ set(HEADER
     "${INCLUDE_DIR_LL}/Testing/MeasurementSinkMock.hpp"
     "${INCLUDE_DIR_LL}/SerialSender.hpp"
     "${INCLUDE_DIR_LL}/Packet.hpp"
+    "${INCLUDE_DIR_LL}/Timer.hpp"
    )
 
 add_library(${PROJECT_NAME} ${SOURCE} ${HEADER})
