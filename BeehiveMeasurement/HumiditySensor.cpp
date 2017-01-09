@@ -16,6 +16,10 @@ HumiditySensor::HumiditySensor(IMeasurementSink &iMeasurementSink, int targetInt
 	
 }
 
+void HumiditySensor::init(){
+  
+}
+
 void HumiditySensor::run(){
 	if(millis() - lastmillis >= interval){
     dht11 Sensor;

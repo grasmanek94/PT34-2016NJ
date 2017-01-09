@@ -19,6 +19,8 @@ public:
         _sink.sendMeasurement(meas);
     }
 
+    virtual void init() override { }
+
     virtual char* getType() override { return "Dummy"; }
 
     virtual int getIndex() override { return 0; }

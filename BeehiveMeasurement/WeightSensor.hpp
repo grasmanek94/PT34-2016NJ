@@ -16,7 +16,7 @@ class WeightSensor : public ISensor
     int index;
     int pin;
     int pin2;
-		float calibration_factor = -43800; // This is the correct value for 1 load cell attached with output in kg, use calibration to alter this value
+		float calibration_factor; // This is the correct value for 1 load cell attached with output in kg, use calibration to alter this value
     Timer timer;
 
 	public:
@@ -25,7 +25,9 @@ class WeightSensor : public ISensor
 
     //Delete Weightsensor
     ~WeightSensor();
-		
+
+    void init();
+    
 		//Start calibration process, use serial monitor on baudrate 9600 and follow instructions printed
 		void reset();
 

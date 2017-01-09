@@ -14,6 +14,10 @@ TemperatureSensor::TemperatureSensor(IMeasurementSink &iMeasurementSink, int tar
 
 }
 
+void TemperatureSensor::init(){
+  
+}
+
 void TemperatureSensor::run(){
 	if(millis() - lastmillis >= interval){
     dht11 Sensor;

@@ -9,12 +9,18 @@ LightSensor::LightSensor(IMeasurementSink &iMeasurementSink, int targetInterval,
 ,interval(targetInterval)
 ,type(type)
 ,index(index)
+,time(0)
+{
+
+}
+
+void LightSensor::init()
 {
   Wire.begin();
   address = 0x23;
   readDelay = 150;
   reading = false;
-  time=millis()-interval;
+  time=millis()-interval;  
 }
 
 void LightSensor::run()

@@ -2,52 +2,57 @@
 #include "Measurement.hpp"
 
 PressureSensor::PressureSensor(IMeasurementSink &iMeasurementSink, int targetInterval, char* type, int index)
-:ISensor(iMeasurementSink, targetInterval, type, index)
-,interval(targetInterval)
-,lastmillis(0)
-,s(iMeasurementSink)
-,index(index)
-,type(type)
-,Press(0)
+  : ISensor(iMeasurementSink, targetInterval, type, index)
+  , interval(targetInterval)
+  , lastmillis(0)
+  , s(iMeasurementSink)
+  , index(index)
+  , type(type)
+  , Press(0)
 {
 
 }
 
-void PressureSensor::run(){
-	if(millis() - lastmillis >= interval){
-		SFE_BMP180 Sensor;
-   double p,t;
-		
-		if(Sensor.begin()){			
-                        Press = Sensor.getPressure(p,t);
-			Measurement ms(Press, type, index);
-			s.sendMeasurement(ms);
-			lastmillis = millis();
-		}
-	}
+void PressureSensor::init() {
+
 }
 
-void PressureSensor::SetTargetInterval(int targetInterval){
-	if(targetInterval > 0){
-		interval = targetInterval;
-	}
+void PressureSensor::run() {
+  if (millis() - lastmillis >= interval) 
+  {
+    SFE_BMP180 Sensor;
+    double p, t;
+
+    if (Sensor.begin()) {
+      Press = Sensor.getPressure(p, t);
+      Measurement ms(Press, type, index);
+      s.sendMeasurement(ms);
+      lastmillis = millis();
+    }
+  }
 }
 
-int PressureSensor::getTargetInterval(){
-	return interval;
+void PressureSensor::SetTargetInterval(int targetInterval) {
+  if (targetInterval > 0) {
+    interval = targetInterval;
+  }
 }
 
-char* PressureSensor::getType(){
-	return type;	
+int PressureSensor::getTargetInterval() {
+  return interval;
 }
 
-int PressureSensor::getIndex(){
-	return index;
-	
+char* PressureSensor::getType() {
+  return type;
 }
 
-void PressureSensor::setIndex(int Index){
-	if(Index > 0){
-		index = Index;
-	}	
+int PressureSensor::getIndex() {
+  return index;
+
+}
+
+void PressureSensor::setIndex(int Index) {
+  if (Index > 0) {
+    index = Index;
+  }
 }

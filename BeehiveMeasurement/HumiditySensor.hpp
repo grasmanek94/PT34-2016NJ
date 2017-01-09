@@ -10,6 +10,7 @@ class HumiditySensor : public ISensor{
 	public:
 	
 	HumiditySensor(IMeasurementSink &iMeasurementSink, int targetInterval, char* type, int index);
+  void init();
 	void run();
 	void SetTargetInterval(int targetInterval);
 	int getTargetInterval();

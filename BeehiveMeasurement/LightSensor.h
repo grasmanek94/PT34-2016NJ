@@ -12,6 +12,7 @@ class LightSensor : public ISensor
 public:
   LightSensor(IMeasurementSink &iMeasurementSink, int tagetInterval, char* type, int index);
   void run();
+  void init();
   void setTargetInterval(int targetInterval);
   int getTargetInterval();
   void setType(char* newType);

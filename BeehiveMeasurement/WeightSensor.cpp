@@ -1,13 +1,19 @@
 #include "WeightSensor.hpp"
 
 WeightSensor::WeightSensor(IMeasurementSink &s, int t, char* T, int i, int p, int p2) 
-              : ISensor(s, t, T, i), sink(s), targetInterval(t), type(T), index(i), pin(p), pin2(p2), scale(p, p2), timer(t, true)
+              : ISensor(s, t, T, i), sink(s), targetInterval(t), type(T), index(i), pin(p), pin2(p2), calibration_factor(-43800), timer(t, true)
 {
-  scale.set_scale(calibration_factor);
-  timer.start();
 }
 
 WeightSensor::~WeightSensor(){}
+
+void WeightSensor::init()
+{
+  scale = HX711(pin,pin2);
+  scale.set_scale(calibration_factor);
+  timer.start(); 
+  reset();
+}
 
 void WeightSensor::run()
 {
