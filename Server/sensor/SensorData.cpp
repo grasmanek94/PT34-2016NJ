@@ -28,21 +28,10 @@ std::string SensorData::GetRequestJson() const
 	return request_text;
 }
 
-//if empty json in ParseRequest then everything is returned
 std::string SensorData::GetResponseJson() const
 {
 	// TODO: add errors here or to parse request
 	std::map <std::string, json> sensor_data;
-
-	if (request_sensors.empty())
-	{
-		request_sensors[SensorTypeTemperature];
-		request_sensors[SensorTypeSound];
-		request_sensors[SensorTypeWeight];
-		request_sensors[SensorTypeHumidity];
-		request_sensors[SensorTypePressure];
-		request_sensors[SensorTypeLightIntensity];
-	}
 
 	for (auto& sens_entry : request_sensors)
 	{
@@ -91,6 +80,7 @@ std::string SensorData::GetResponseJson() const
 	return j.dump();
 }
 
+//if empty json in ParseRequest then everything is returned
 void SensorData::ParseRequestJson(const std::string& _json)
 {
 	const json j = json::parse(_json.c_str());
@@ -100,7 +90,7 @@ void SensorData::ParseRequestJson(const std::string& _json)
 	if (sensor_data != j.end())
 	{
 		auto sens_arr = SensorTypeStrings.left;
-		for(auto& sens_entry: sens_arr)
+		for (auto& sens_entry : sens_arr)
 		{
 			auto found_sensor_array = sensor_data->find(sens_entry.second);
 			if (found_sensor_array != sensor_data->end())
@@ -108,6 +98,16 @@ void SensorData::ParseRequestJson(const std::string& _json)
 				request_sensors[sens_entry.first] = found_sensor_array->get<std::vector<size_t>>();
 			}
 		}
+	}
+
+	if (request_sensors.empty())
+	{
+		request_sensors[SensorTypeTemperature] = std::vector<size_t>();
+		request_sensors[SensorTypeSound] = std::vector<size_t>();
+		request_sensors[SensorTypeWeight] = std::vector<size_t>();
+		request_sensors[SensorTypeHumidity] = std::vector<size_t>();
+		request_sensors[SensorTypePressure] = std::vector<size_t>();
+		request_sensors[SensorTypeLightIntensity] = std::vector<size_t>();
 	}
 }
 

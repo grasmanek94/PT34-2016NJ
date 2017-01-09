@@ -2,7 +2,7 @@
 #include <csignal>
 #include <iostream>
 #include "Processor.hpp"
-volatile extern sig_atomic_t done = 0;
+volatile extern sig_atomic_t done;
 
 int main()
 {

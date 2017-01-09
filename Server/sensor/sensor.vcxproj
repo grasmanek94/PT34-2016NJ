@@ -26,6 +26,7 @@
     <ClCompile Include="..\common\Timer.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Processor.cpp" />
+    <ClCompile Include="SerialReceiver.cpp" />
     <ClCompile Include="SimpleSensor.cpp" />
     <ClCompile Include="ExecCommand.cpp" />
     <ClCompile Include="FirmwareInfo.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="..\common\Timer.hpp" />
     <ClInclude Include="Device.hpp" />
     <ClInclude Include="Processor.hpp" />
+    <ClInclude Include="SerialReceiver.hpp" />
     <ClInclude Include="SimpleSensor.hpp" />
     <ClInclude Include="ExecCommand.hpp" />
     <ClInclude Include="FirmwareInfo.hpp" />

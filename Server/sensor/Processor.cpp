@@ -26,7 +26,8 @@ Processor::Processor()
 			new SimpleSensor(SensorTypeHumidity, SensorUnitPercent, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 7.0, 10.0, -10.2 }),
 			new SimpleSensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementInside, 1, -100.0, 200.0, Position{ 8.0, 10.0, -10.1 }),
 			new SimpleSensor(SensorTypeSound, SensorUnitDecibel, SensorPlacementOutside, 1, -100.0, 200.0, Position{ 9.0, 10.0, -10.0 })
-		})
+		}),
+	receiver(&device)
 {
 	static bool terminator_initialized = false;
 	if (!terminator_initialized)
@@ -67,6 +68,9 @@ void Processor::Run()
 			}
 		}
 
+		// update values from serial / arduino here
+		receiver.Update();
+
 		if (data_send_timer.ElapsedMilliseconds() > 10000)
 		{
 			data_send_timer.Restart();
@@ -77,11 +81,6 @@ void Processor::Run()
 			// send to belgie
 			message.Set(data.GetResponseJson());
 			out_queue.Push(&message);
-		}
-
-		// update values from serial / arduino here
-		{
-			// todo
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));

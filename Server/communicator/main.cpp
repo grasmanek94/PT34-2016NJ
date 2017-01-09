@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Communicator.hpp"
 
-volatile extern sig_atomic_t done = 0;
+volatile extern sig_atomic_t done;
 
 int main()
 {
