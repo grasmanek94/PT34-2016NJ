@@ -2,6 +2,7 @@
 #define DUMMYSENSOR_H
 
 #include "../IMeasurementSink.hpp"
+#include "../ISensor.hpp"
 
 class DummySensor : public ISensor
 {

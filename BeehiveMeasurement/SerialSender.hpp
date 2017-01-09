@@ -2,7 +2,6 @@
 #define SERIAL_SENDER_HPP_
 
 #include "IMeasurementSink.hpp"
-#include "Packet.hpp"
 
 class SerialSender : public IMeasurementSink {
 public:
