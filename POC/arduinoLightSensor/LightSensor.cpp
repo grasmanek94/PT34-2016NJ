@@ -21,8 +21,8 @@ void LightSensor::run()
   }
   elseif(reading && millis()>time+readDelay)
   {
-    uint16_t 
-    readData()
+    uint16_t LUX = readData();
+
   }
 }
 
@@ -51,9 +51,10 @@ String LightSensorgetPosition()
 
 void LightSensor::requestData()
 {
+  reading = true;
   Wire.beginTransmission(address);
-Wire.write(0x10);//1lx reolution 120ms
-Wire.endTransmission();
+  Wire.write(0x10);//1lx reolution 120ms
+  Wire.endTransmission();
 }
 //delay hier
 uint16_t LightSensor::readData()
@@ -78,4 +79,5 @@ uint16_t LightSensor::readData()
   {
     return -1;
   }
+  reading = false;
 }
