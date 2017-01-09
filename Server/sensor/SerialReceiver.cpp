@@ -4,6 +4,8 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include <sys/ioctl.h>
+#include <csignal>
 #include <Debug.hpp>
 #include <json/json.hpp>
 #include "SerialReceiver.hpp"
@@ -79,11 +81,11 @@ SerialReceiver::SerialReceiver(Device* setup)
 		throw std::runtime_error("setup == NULL");
 	}
 
-	char *portname = "/dev/ttyUSB1";
-	serial_fd = open(portname, O_RDWR | O_NOCTTY | O_SYNC);
+	std::string portname("/dev/ttyUSB1");
+	serial_fd = open(portname.c_str(), O_RDWR | O_NOCTTY | O_SYNC);
 	if (serial_fd < 0)
 	{
-		printf("error %d opening %s: %s", errno, portname, strerror(errno));
+		printf("error %d opening %s: %s", errno, portname.c_str(), strerror(errno));
 		throw std::runtime_error("serial problem");
 	}
 
@@ -108,7 +110,7 @@ void SerialReceiver::ReceiverThread()
 	{
 		int bytes_avail;
 		ioctl(serial_fd, FIONREAD, &bytes_avail);
-		if (bytes_avail > 0 && serial_buffer_pos < (sizeof(serial_buffer) - bytes_avail))
+		if (bytes_avail > 0 && (size_t)serial_buffer_pos < (sizeof(serial_buffer) - bytes_avail))
 		{
 			int n = read(serial_fd, serial_buffer + serial_buffer_pos, sizeof(serial_buffer) - serial_buffer_pos);
 			if (n > 0)
