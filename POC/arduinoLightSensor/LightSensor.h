@@ -4,6 +4,7 @@
 #include<arduino.h>
 #include"wire.h"
 #include"iMeasurementSink.h"
+#include"Measurement"
 
 class LightSensor:ISensor
 {

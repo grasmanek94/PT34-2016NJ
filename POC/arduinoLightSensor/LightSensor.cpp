@@ -24,17 +24,16 @@ void LightSensor::run()
   elseif(reading && millis()>time+readDelay)
   {
     uint16_t LUX = readData();
-    Measurement LuxMeas = Measurement(*this, type, index, LUX)
-    sink->send(LuxMeas)
+    if(LUX==60000)
+      return;
+    Measurement LuxMeas = Measurement(*this, type, index, LUX);
+    sink->send(LuxMeas);
   }
 }
 
 void LightSensor::setTargetInterval(int targetInterval)
 {
-  if(targetInterval>readDelay)
-  {
-    interval = targetInterval;
-  }
+  interval = targetInterval;
 }
 
 int LightSensorgetTargetInterval()
@@ -70,13 +69,14 @@ void LightSensor::requestData()
   Wire.endTransmission();
 }
 //delay hier
-uint16_t LightSensor::readData()
+uint16_t LightSensor::readData() //max waarde van de sensor is 54612. 60000 is error waarde
 {
   uint16_t val = 0;
   int i = 0;
   Wire.beginTransmission(address);
   Wire.requestFrom(address, 2);
-  while (Wire.available()) //
+  reading = false;
+  while (Wire.available())
   {
     val<<=8;
     val += Wire.read();
@@ -86,11 +86,10 @@ uint16_t LightSensor::readData()
   if (i == 2)
   {
     val /= 1.2;
-    reading = false;
     return val;
   }
   else
   {
-    return -1;
+    return 60000;
   }
 }
