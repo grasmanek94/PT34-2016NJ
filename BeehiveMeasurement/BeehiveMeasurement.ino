@@ -13,11 +13,11 @@ static const uint8_t debugPin = 13;
 
 SerialSender serialSender(0);
 //DummySensor dummySensor(serialSender, interval, "12", 132);
-//LightSensor lightSensor(serialSender, interval, "lux", 1);
-WeightSensor weightSensor(serialSender, interval, "Weight", 1, 2, 3);
-//HumiditySensor humiditySensor(serialSender, interval, "Humidity", 0);
-//TemperatureSensor temperatureSensor(serialSender, interval, "Temperature", 0);
-//PressureSensor pressureSensor(serialSender, interval, "Pressure", 0);
+LightSensor lightSensor(serialSender, interval, "lux", 1);
+WeightSensor weightSensor(serialSender, interval, "Weight", 1, 3, 4);
+HumiditySensor humiditySensor(serialSender, interval, "Humidity", 0);
+TemperatureSensor temperatureSensor(serialSender, interval, "Temperature", 0);
+PressureSensor pressureSensor(serialSender, interval, "Pressure", 0);
 
 void setup()
 {
@@ -25,20 +25,20 @@ void setup()
   digitalWrite(debugPin, LOW);
   Serial.begin(115200);
   //dummySensor.init();
-  //lightSensor.init();
+  lightSensor.init();
   weightSensor.init();
-  //humiditySensor.init();
-  //temperatureSensor.init();
-  //pressureSensor.init();
+  humiditySensor.init();
+  temperatureSensor.init();
+  pressureSensor.init();
   digitalWrite(debugPin, HIGH);
 }
 
 void loop()
 {
   //dummySensor.run();
-  //lightSensor.run();
+  lightSensor.run();
   weightSensor.run();
-  //humiditySensor.run();
-  //temperatureSensor.run();
-  //pressureSensor.run();
+  humiditySensor.run();
+  temperatureSensor.run();
+  pressureSensor.run();
 }
