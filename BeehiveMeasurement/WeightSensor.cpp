@@ -11,6 +11,7 @@ void WeightSensor::init()
 {
   scale = HX711(pin,pin2);
   scale.set_scale(calibration_factor);
+  scale.tare(5);
   timer.start(); 
   reset();
 }
