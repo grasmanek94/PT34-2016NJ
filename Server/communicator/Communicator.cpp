@@ -37,6 +37,13 @@ void Communicator::on_open(websocketpp::connection_hdl hdl)
 	}
 }
 
+void Communicator::on_fail(websocketpp::connection_hdl hdl) 
+{
+	client::connection_ptr con = websocket_client.get_con_from_hdl(hdl);
+	DEBUG_MSG("Communicator::on_fail(code[" << con->get_response_code() << "], state[" << con->get_state() << "], message[\"" << con->get_response_msg() << "\"])");
+	throw std::runtime_error(("websocket failed to \"" + host.GetHost() + "\" because response code: " + std::to_string(con->get_response_code()) + " and message[\"" + con->get_response_msg() + "\"])").c_str());
+}
+
 void Communicator::on_close(websocketpp::connection_hdl hdl)
 {
 	DEBUG_MSG("Communicator::on_close");
@@ -100,7 +107,7 @@ Communicator::Communicator()
 
 	// Register our message handler
 	websocket_client.set_message_handler(bind(&Communicator::on_message, this, ::_1, ::_2));
-
+	websocket_client.set_fail_handler(bind(&Communicator::on_fail, this, ::_1));
 	websocket_client.set_open_handler(bind(&Communicator::on_open, this, ::_1));
 	websocket_client.set_close_handler(bind(&Communicator::on_close, this, ::_1));
 

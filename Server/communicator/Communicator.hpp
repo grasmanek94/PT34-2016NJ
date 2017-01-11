@@ -22,6 +22,7 @@ private:
 	void on_open(websocketpp::connection_hdl hdl);
 	void on_close(websocketpp::connection_hdl hdl);
 	void on_message(websocketpp::connection_hdl hdl, message_ptr msg);
+	void on_fail(websocketpp::connection_hdl hdl);
 
 	typedef std::set<websocketpp::connection_hdl, std::owner_less<websocketpp::connection_hdl>> con_list;
 	con_list connections;
