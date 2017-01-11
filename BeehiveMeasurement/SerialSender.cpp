@@ -25,5 +25,5 @@ void SerialSender::setBaudrate(unsigned int baudrate)
 void SerialSender::sendMeasurement(Measurement measurement)
 {
     auto data = Json::measurementToJson(measurement);
-    Serial.println(data);
+    Serial.print(data);
 }
