@@ -26,7 +26,7 @@ void setup()
   Serial.begin(115200);
   //dummySensor.init();
   //lightSensor.init();
-  weightSensor.init(); ///@ todo this blocks..
+  weightSensor.init();
   //humiditySensor.init();
   //temperatureSensor.init();
   //pressureSensor.init();
