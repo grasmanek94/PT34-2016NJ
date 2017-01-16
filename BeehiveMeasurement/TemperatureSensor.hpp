@@ -27,7 +27,7 @@ class TemperatureSensor : public ISensor{
 		IMeasurementSink& s;
 		int index;
 		char* type;
-		int temp;
+		double temp;
 		int pin;
 	
 };

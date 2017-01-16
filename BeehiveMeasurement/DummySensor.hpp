@@ -1,8 +1,8 @@
 #ifndef DUMMYSENSOR_H
 #define DUMMYSENSOR_H
 
-#include "../IMeasurementSink.hpp"
-#include "../ISensor.hpp"
+#include "IMeasurementSink.hpp"
+#include "ISensor.hpp"
 
 class DummySensor : public ISensor
 {

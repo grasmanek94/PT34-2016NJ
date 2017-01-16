@@ -3,11 +3,11 @@
 
 class Measurement {
 public:
-    Measurement(int data, char* type, int id);
+    Measurement(double data, char* type, int id);
     virtual ~Measurement();
 
-    int getData() const;
-    void setData(int data);
+    double getData() const;
+    void setData(double data);
 
     char* getType() const;
     void setType(char* type);
@@ -16,7 +16,7 @@ public:
     void setId(int id);
 
 private:
-    int _data;
+    double _data;
     char* _type;
     int _id;
 };

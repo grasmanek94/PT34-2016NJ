@@ -22,7 +22,7 @@ public:
 
 private:
   void requestData();
-  uint16_t readData();
+  double readData();
 
   IMeasurementSink& sink;
   int interval;

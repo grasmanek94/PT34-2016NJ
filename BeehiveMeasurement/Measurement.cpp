@@ -1,7 +1,7 @@
 #include "Measurement.hpp"
 #include <stddef.h>
 
-Measurement::Measurement(int data, char* type, int id)
+Measurement::Measurement(double data, char* type, int id)
     :_data(data), _type(type), _id(id)
 {
 
@@ -12,12 +12,12 @@ Measurement::~Measurement()
 
 }
 
-int Measurement::getData() const
+double Measurement::getData() const
 {
     return _data;
 }
 
-void Measurement::setData(int data)
+void Measurement::setData(double data)
 {
     _data = data;
 }

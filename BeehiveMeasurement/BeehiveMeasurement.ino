@@ -1,5 +1,5 @@
 #include "SerialSender.hpp"
-#include "sensors/DummySensor.hpp"
+//#include "DummySensor.hpp"
 #include "LightSensor.h"
 #include "WeightSensor.hpp"
 #include "HumiditySensor.hpp"

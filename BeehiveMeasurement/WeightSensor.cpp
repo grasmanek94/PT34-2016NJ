@@ -20,7 +20,7 @@ void WeightSensor::run()
 {
   if(timer.isElapsed())
   {
-    int temp = (int) scale.get_units();
+    double temp = (double) scale.get_units();
     Measurement ms = Measurement(temp, type, index);
     sink.sendMeasurement(ms); 
   }

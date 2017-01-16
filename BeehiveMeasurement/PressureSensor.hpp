@@ -26,7 +26,7 @@ class PressureSensor : public ISensor {
     IMeasurementSink& s;
     int index;
     char* type;
-    int Press;
+    double Press;
 };
 
 #endif

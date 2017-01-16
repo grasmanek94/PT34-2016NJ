@@ -81,7 +81,7 @@ SerialReceiver::SerialReceiver(Device* setup)
 		throw std::runtime_error("setup == NULL");
 	}
 
-	std::string portname("/dev/ttyUSB1");
+        std::string portname("/dev/ttyACM0");
 	serial_fd = open(portname.c_str(), O_RDWR | O_NOCTTY | O_SYNC);
 	if (serial_fd < 0)
 	{
